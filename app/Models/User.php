@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class User extends Authenticatable {
     use SoftDeletes,
         \App\Models\Traits\HasAttach,
+        \App\Models\Traits\CreatedBy,
         HasFactory;
 
     protected $attributes = [
@@ -33,7 +34,7 @@ class User extends Authenticatable {
     ];
     static $attachFields = [
         'image' => [
-            'sizes' => ['large' => 'resize,400x400', 'small' => 'crop,150x150'],
+            'sizes' => ['large' => 'resize,300x300', 'small' => 'crop,150x150'],
         ],
     ];
     public $profileRules = [
@@ -73,25 +74,43 @@ class User extends Authenticatable {
         parent::boot();
         static::created(function ($row) {
             if (!app()->environment('testing')) {
-                // \App\Jobs\UserCreated::dispatch($row);
+                 \App\Jobs\UserCreated::dispatch($row);
             }
         });
     }
 
-    public function getRoles() {
-        return \App\Models\Role::where('id', '>', 1)->pluck('title', 'id');
+    public function getDegrees() {
+        return [
+            'primary_school' => trans('api.Primary school'),
+            'high_school' => trans('api.High school'),
+            'bachelor' => trans('api.Bachelor'),
+            'master' => trans('api.Master'),
+            'phd' => trans('api.PHD'),
+        ];
+    }
+
+    public function push_tokens() {
+        return $this->hasMany(PushToken::class, 'created_by');
     }
 
     public function role() {
         return $this->belongsTo(Role::class, 'role_id')->withDefault();
     }
 
-    public function includes() {
-        return $this;
+    public function company() {
+        return $this->belongsTo(Company::class, 'company_id')->withDefault();
     }
 
-    public function single_includes() {
-        return $this;
+    public function country() {
+        return $this->belongsTo(Country::class, 'country_id')->withDefault();
+    }
+
+    public function includes() {
+        return $this->with(['company', 'country']);
+    }
+
+    public function notifications() {
+        return $this->hasMany(Notification::class, 'user_id');
     }
 
     public function scopeFilterAndSort() {
@@ -158,7 +177,7 @@ class User extends Authenticatable {
                 return [
                     'ID' => $row->id,
                     'Role' => (@$row->role_id) ? $row->role->title : '',
-                    'Type'=>$this->type,
+                    'Type' => $this->type,
                     'Name' => $row->name,
                     'Email' => $row->email,
                     'Mobile' => $row->mobile_number,
@@ -166,6 +185,7 @@ class User extends Authenticatable {
                 ];
             });
     }
+
     public function updateToken($row) {
         $row->token = generateToken(request('email'));
         $row->save();

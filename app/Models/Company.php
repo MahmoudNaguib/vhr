@@ -42,7 +42,7 @@ class Company extends BaseModel {
     }
 
     public function includes() {
-        return $this->with(['industry']);
+        return $this->with(['industry','country','creator']);
     }
 
     public function scopeFilterAndSort() {
@@ -52,6 +52,9 @@ class Company extends BaseModel {
             })
             ->when(request('industry_id'), function ($q) {
                 return $q->where('industry_id', request('industry_id'));
+            })
+            ->when(request('country_id'), function ($q) {
+                return $q->where('country_id', request('country_id'));
             })
             ->when(request('title'), function ($q) {
                 return $q->where('title', 'LIKE', '%' . request('title') . '%');
@@ -68,6 +71,7 @@ class Company extends BaseModel {
                 return [
                     'ID' => $row->id,
                     'Title' => $row->title,
+                    'Industry' => @$row->industry->title,
                     'Country' => @$row->country->title,
                     'City' => @$row->city,
                     'Address' => @$row->address,

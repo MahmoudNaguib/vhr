@@ -9,10 +9,13 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.7",
+        "lanin/laravel-api-debugger": "^4.0",
         "laravel/framework": "^8.75",
         "laravel/helpers": "^1.5",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "lesichkovm/laravel-advanced-route": "^1.9",
+        "mahmoudnaguib/laravel-langman": "^1.0",
         "rap2hpoutre/fast-excel": "^3.2"
     },
     "require-dev": {

@@ -15,6 +15,11 @@ function insertDefaultConfigs() {
             'created_by' => 1
         ],
         [
+            'field' => 'contact_email',
+            'value' => env('CONTACT_EMAIL'),
+            'created_by' => 1
+        ],
+        [
             'field' => 'facebook',
             'value' => env('FACEBOOK'),
             'created_by' => 1
@@ -53,7 +58,8 @@ function insertDefaultUsers() {
         'confirmed' => 1,
         'is_active' => 1,
         'created_by' => 1,
-        'image' => resizeImage(public_path() . '/images/users/' . rand(1, 10) . '.png', \App\Models\User::$attachFields['image']['sizes']),
+        'image' => resizeImage(public_path() . '/images/users/avatar.png', \App\Models\User::$attachFields['image']['sizes']),
+        'country_id' => 62,
     ];
     $adminUser = [
         'role_id' => 2,
@@ -68,7 +74,8 @@ function insertDefaultUsers() {
         'confirmed' => 1,
         'is_active' => 1,
         'created_by' => 1,
-        'image' => resizeImage(public_path() . '/images/users/' . rand(1, 10) . '.png', \App\Models\User::$attachFields['image']['sizes']),
+        'image' => resizeImage(public_path() . '/images/users/avatar.png', \App\Models\User::$attachFields['image']['sizes']),
+        'country_id' => 62,
     ];
     $recruiterUser = [
         'role_id' => null,
@@ -83,7 +90,8 @@ function insertDefaultUsers() {
         'confirmed' => 1,
         'is_active' => 1,
         'created_by' => 1,
-        'image' => resizeImage(public_path() . '/images/users/' . rand(1, 10) . '.png', \App\Models\User::$attachFields['image']['sizes']),
+        'image' => resizeImage(public_path() . '/images/users/avatar.png', \App\Models\User::$attachFields['image']['sizes']),
+        'country_id' => 62,
     ];
     $employeeUser = [
         'role_id' => null,
@@ -98,9 +106,11 @@ function insertDefaultUsers() {
         'confirmed' => 1,
         'is_active' => 1,
         'created_by' => 1,
-        'image' => resizeImage(public_path() . '/images/users/' . rand(1, 10) . '.png', \App\Models\User::$attachFields['image']['sizes']),
+        'image' => resizeImage(public_path() . '/images/users/avatar.png', \App\Models\User::$attachFields['image']['sizes']),
+        'country_id' => 62,
     ];
     $users = [
+        $superAdminUser,
         $adminUser,
         $recruiterUser,
         $employeeUser

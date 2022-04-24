@@ -18,6 +18,7 @@ class CreateConfigsTable extends Migration {
             $table->bigInteger('created_by')->nullable()->index();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('deleted_at')->nullable()->index();
         });
     }
 

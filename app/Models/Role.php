@@ -12,7 +12,10 @@ class Role extends BaseModel {
     protected $hidden = [
         'deleted_at',
     ];
-    public $rules = ['title' => 'required|unique:roles,title', 'permissions' => 'required'];
+    public $rules = [
+        'title' => 'required',
+        'permissions' => 'required'
+    ];
 
     public function getPermissionsAttribute($value) {
         return json_decode($value);

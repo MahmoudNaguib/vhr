@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e978fcd58cef64ceb8cb2b7a478d187",
+    "content-hash": "5c8f22598e60914880f8781e30d6ead2",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1116,6 +1116,77 @@
             "time": "2021-12-16T16:49:26+00:00"
         },
         {
+            "name": "lanin/laravel-api-debugger",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mlanin/laravel-api-debugger.git",
+                "reference": "eed485a7cfd01fe9248403af75a4ada950b7cde9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mlanin/laravel-api-debugger/zipball/eed485a7cfd01fe9248403af75a4ada950b7cde9",
+                "reference": "eed485a7cfd01fe9248403af75a4ada950b7cde9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=5.4.0",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3.1",
+                "orchestra/testbench": ">=3.4.0",
+                "phpunit/phpunit": "^7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Lanin\\Laravel\\ApiDebugger\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Debugger": "Lanin\\Laravel\\ApiDebugger\\Support\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Support/helpers.php"
+                ],
+                "psr-4": {
+                    "Lanin\\Laravel\\ApiDebugger\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxim Lanin",
+                    "email": "max@lanin.me",
+                    "homepage": "http://lanin.me"
+                }
+            ],
+            "description": "Easily debug your JSON API.",
+            "keywords": [
+                "api",
+                "debug",
+                "debugger",
+                "dump",
+                "framework",
+                "json",
+                "laravel",
+                "log",
+                "queries"
+            ],
+            "support": {
+                "issues": "https://github.com/mlanin/laravel-api-debugger/issues",
+                "source": "https://github.com/mlanin/laravel-api-debugger/tree/4.0.0"
+            },
+            "time": "2020-07-09T10:34:16+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v8.83.9",
             "source": {
@@ -1873,6 +1944,119 @@
                 }
             ],
             "time": "2022-04-17T13:12:02+00:00"
+        },
+        {
+            "name": "lesichkovm/laravel-advanced-route",
+            "version": "v1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lesichkovm/laravel-advanced-route.git",
+                "reference": "8bec602b5fd6f8418fe2f6650a74110a7abf7cc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lesichkovm/laravel-advanced-route/zipball/8bec602b5fd6f8418fe2f6650a74110a7abf7cc4",
+                "reference": "8bec602b5fd6f8418fe2f6650a74110a7abf7cc4",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.*|6.*|7.*|8.*|9.*|10.*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/AdvancedRoute.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Milan Lesichkov",
+                    "email": "lesichkovm@gmail.com",
+                    "homepage": "http://lesichkov.co.uk",
+                    "role": "Lead Developer"
+                }
+            ],
+            "description": "Advanced route class for Laravel - restoring implicit controllers to the framework.",
+            "homepage": "http://github.com/lesichkovm/laravel-advanced-route",
+            "keywords": [
+                "advanced",
+                "laravel",
+                "lesichkov",
+                "php",
+                "route"
+            ],
+            "support": {
+                "issues": "https://github.com/lesichkovm/laravel-advanced-route/issues",
+                "source": "https://github.com/lesichkovm/laravel-advanced-route/tree/v1.9.0"
+            },
+            "time": "2021-11-13T08:33:56+00:00"
+        },
+        {
+            "name": "mahmoudnaguib/laravel-langman",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MahmoudNaguib/laravel-langman.git",
+                "reference": "05210432b92840e7ceda1492f8c954857635d71a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MahmoudNaguib/laravel-langman/zipball/05210432b92840e7ceda1492f8c954857635d71a",
+                "reference": "05210432b92840e7ceda1492f8c954857635d71a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5.9 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.4",
+                "orchestra/database": "~3.0",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "^4.8 || ^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MahmoudNaguib\\Langman\\LangmanServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MahmoudNaguib\\Langman\\": "src"
+                },
+                "classmap": [
+                    "tests"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mahmoud Naguib",
+                    "email": "nagooba@gmail.com",
+                    "homepage": "https://mahmoudnaguib.github.io"
+                }
+            ],
+            "description": "Manage language files with ease.",
+            "homepage": "https://github.com/mahmoudnaguib/laravel-langman",
+            "keywords": [
+                "laravel",
+                "localization",
+                "multilingual"
+            ],
+            "support": {
+                "issues": "https://github.com/MahmoudNaguib/laravel-langman/issues",
+                "source": "https://github.com/MahmoudNaguib/laravel-langman/tree/1.0.0"
+            },
+            "time": "2021-12-21T17:31:26+00:00"
         },
         {
             "name": "monolog/monolog",
