@@ -1,5 +1,7 @@
 @extends('emails.master')
-@section('title'){{trans("email.Forgot password")}}@endsection
+@section('title')
+    {{trans("email.Forgot password")}}
+@endsection
 @section('content')
     <p>{{trans("email.Welcome")}} <strong>{{$row->name}}</strong></p>
     <p>{{trans("email.Thanks for joining us at")}} {{ appName() }}</p>
@@ -23,11 +25,9 @@
         {{trans('email.Click the below link to reset password')}}
     </p>
     <p>
-        @if($row->role_id)
-            <a href="{{app()->make("url")->to('/')}}/{{lang()}}/admin/auth/reset-password?token={{$row->password_token}}">{{trans('email.Reset password')}}</a>
-        @else
-            <a href="{{env('BASE_URL')}}/{{lang()}}/auth/reset-password?token={{$row->password_token}}">{{trans('email.Reset password')}}</a>
-        @endif
+        <a href="{{app()->make("url")->to('/')}}/auth/reset-password?token={{$row->password_token}}">
+            {{trans('email.Reset password')}}
+        </a>
     </p>
 
 @endsection

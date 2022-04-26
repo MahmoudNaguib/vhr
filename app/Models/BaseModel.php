@@ -11,4 +11,8 @@ class BaseModel extends Model {
         HasFactory;
 
     public $timestamps = false;
+
+    public function getCountries() {
+        return \App\Models\Country::pluck('title', 'id');
+    }
 }

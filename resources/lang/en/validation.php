@@ -129,7 +129,9 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
-
+    'mobile' => 'The field must be a valid mobile number',
+    'phone' => 'The field must be a valid phone number',
+    'in_degree'=>'Invalid value for this field',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

@@ -32,7 +32,7 @@
 
     @if(!$row->confirmed)
         <p>{{trans('email.To confirm your account please click the link below')}}</p>
-        <a href="{{env('BASE_URL')}}/auth/confirm?token={{$row->confirm_token}}">{{trans('email.Confirm')}}</a>
+        <a href="{{app()->make("url")->to('/')}}/auth/confirm?token={{$row->confirm_token}}">{{trans('email.Confirm')}}</a>
         </p>
     @endif
 

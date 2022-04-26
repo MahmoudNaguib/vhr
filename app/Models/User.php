@@ -37,10 +37,9 @@ class User extends Authenticatable {
             'sizes' => ['large' => 'resize,300x300', 'small' => 'crop,150x150'],
         ],
     ];
-    public $profileRules = [
+    public $edit = [
         'name' => 'required|min:4',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|confirmed|min:8',
+        'mobile' => 'required|mobile',
         'image' => 'nullable|image|max:4000'
     ];
     public $rules = [
@@ -49,7 +48,6 @@ class User extends Authenticatable {
         'email' => 'required|email|unique:users,email',
         'mobile' => 'required|mobile',
         'password' => 'required|confirmed|min:8',
-        'image' => 'nullable|image|max:4000'
     ];
     public $loginRules = [
         'email' => 'required|email',
@@ -78,14 +76,23 @@ class User extends Authenticatable {
             }
         });
     }
+    public function getCountries() {
+        return \App\Models\Country::pluck('title', 'id');
+    }
+    public function getGenders() {
+        return [
+            'm' => trans('app.Male'),
+            'f' => trans('app.Female'),
+        ];
+    }
 
     public function getDegrees() {
         return [
-            'primary_school' => trans('api.Primary school'),
-            'high_school' => trans('api.High school'),
-            'bachelor' => trans('api.Bachelor'),
-            'master' => trans('api.Master'),
-            'phd' => trans('api.PHD'),
+            'primary_school' => trans('app.Primary school'),
+            'high_school' => trans('app.High school'),
+            'bachelor' => trans('app.Bachelor'),
+            'master' => trans('app.Master'),
+            'phd' => trans('app.PHD'),
         ];
     }
 

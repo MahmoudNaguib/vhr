@@ -27,7 +27,7 @@ trait HasAttach {
                 $oldFile = $this->getOriginal($field);
                 //////////////////// upload
                 if (request()->hasFile($field) && request()->file($field)->isValid()) {
-                    $uploadPath = uploads();
+                    $uploadPath ='uploads';
                     $image = request()->file($field);
                     $fileName = strtolower(str_random(10)) . time() . '.' . $image->getClientOriginalExtension();
                     request()->file($field)->move($uploadPath, $fileName);

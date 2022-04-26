@@ -17,6 +17,7 @@ class ConfigsSeeder extends Seeder {
             \DB::statement("ALTER TABLE configs AUTO_INCREMENT = 1");
         }
         insertDefaultConfigs();
+        \Cache::forget('configs');
     }
 
 }

@@ -98,6 +98,10 @@ class AuthController extends Controller {
             'token' => $token,
             'image' => resizeImage(public_path() . '/images/users/avatar.png', \App\Models\User::$attachFields['image']['sizes'])
         ]);
+        //// if type is recruiter
+        if(request('type')=='recruiter'){
+            request()->request->add(['is_company_admin'=>1]);
+        }
         if ($row = $this->model->create(request()->except(['password_confirmation', 'accept']))) {
             return response()->json(['message' => trans("api.Welcome to our community, We have sent you an email, Please check your inbox")], 201);
         }
@@ -137,42 +141,4 @@ class AuthController extends Controller {
         }
         return response()->json(['message' => trans('api.Failed to do this action')], 400);
     }
-
-    public function getConfirm() {
-        if (!request('token')) {
-            return response()->json(['message' => trans('api.Invalid confirmation token')], 401);
-        }
-        $row = $this->model->where('confirm_token', request('token'))->first();
-        if (!$row) {
-            return response()->json(['message' => trans('api.Invalid confirmation token')], 401);
-        }
-        if ($row->update(['confirmed' => 1, 'confirm_token' => null])) {
-            return response()->json(['message' => trans('api.Your account has been confirmed')], 200);
-        }
-        return response()->json(['message' => trans('api.Failed to do this action')], 400);
-    }
-
-    public function postResetPassword() {
-        if (!request('token')) {
-            return response()->json(['message' => trans('api.Invalid confirmation token')], 401);
-        }
-        $row = $this->model->where('password_token', request('token'))->first();
-        if (!$row) {
-            return response()->json(['message' => trans('api.Invalid confirmation token')], 401);
-        }
-        $validator = Validator::make(request()->all(), $this->resetRules);
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => trans('api.Validation errors'),
-                'errors' => transformValidation($validator->errors()->messages())
-            ], 422);
-        }
-        if ($row->update(request()->only(['password']))) {
-            $row->password_token = null;
-            $row->save();
-            return response()->json(['message' => trans('api.Your password has been changed')], 200);
-        }
-        return response()->json(['message' => trans('api.Failed to do this action')], 400);
-    }
-
 }

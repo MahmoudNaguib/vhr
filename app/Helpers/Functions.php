@@ -2,6 +2,11 @@
 
 use Intervention\Image\Facades\Image;
 
+function appVersion() {
+    $json = json_decode(@file_get_contents(public_path() . '/version.json'));
+    return number_format(@$json->version, 2);
+}
+
 function RandomString($n) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
     $randstring = '';
@@ -204,4 +209,19 @@ function sendPushNotifications($tokens, $title, $body, $data) {
         $result = curl_exec($ch);
         curl_close($ch);
     }
+}
+
+function image($img, $size = '', $attributes = Null) {
+    $path = 'uploads/' . $size;
+    $src = app()->make("url")->to('/') . '/' . $path . '/' . $img;
+    if (!file_exists(public_path() . '/' . $path . '/' . $img) || !$img) {
+        $src = '/img/placeholder.png';
+    }
+    $others = '';
+    if ($attributes) {
+        foreach ($attributes as $key => $value) {
+            $others .= $key . '="' . $value . '"';
+        }
+    }
+    return '<img src="' . $src . '" ' . $others . '>';
 }

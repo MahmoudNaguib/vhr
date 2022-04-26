@@ -12,7 +12,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+AdvancedRoute::controller('auth', \App\Http\Controllers\AuthController::class);
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['auth']], function () {
+    AdvancedRoute::controller('profile', \App\Http\Controllers\ProfileController::class);
 });
+
+
+
+
+
+/*Route::get('/', function () {
+    return view('welcome');
+});*/

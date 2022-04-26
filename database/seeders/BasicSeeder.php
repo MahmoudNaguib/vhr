@@ -13,6 +13,7 @@ class BasicSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        \Cache::forget('configs');
         configureUploads();
         ///////////////////////////////////////////////////////////////// Default Configs
         \DB::table('configs')->delete();
