@@ -15,12 +15,14 @@ mix.styles([
     'resources/lib/fontawesome-free/css/all.css',
     'resources/lib/bootstrap/css/bootstrap.min.css',
     'resources/lib/select2/css/select2.min.css',
+    'resources/lib/jquery-ui/css/jquery-ui.css',
 ], 'public/css/vendors.css');
 mix.sass('resources/sass/app.scss', 'public/css');
 
 mix.scripts([
     'resources/lib/jquery/js/jquery.js',
     'resources/lib/bootstrap/js/bootstrap.bundle.min.js',
+    'resources/lib/jquery-ui/js/jquery-ui.js',
     'resources/lib/select2/js/select2.min.js',
     'resources/lib/notify/js/notify.min.js',
 ], 'public/js/vendors.js');

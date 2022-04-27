@@ -12,10 +12,10 @@
     <?php echo $__env->make('form.password',['name'=>'password_confirmation','attributes'=>['class'=>'form-control','label'=>trans('app.Password confirmation'),'placeholder'=>trans('app.Password confirmation'),'autocomplete'=>"off",'required'=>1]], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <div class="form-group mt-3">
-        <button class="btn btn-primary"><?php echo e(trans('app.Submit')); ?></button>
-        <p>
-            <a href="auth/login"><?php echo e(trans('app.Login')); ?></a>
-        </p>
+        <div class="form-group mt-3">
+            <?php echo $__env->make('form.submit',['label'=>trans('Submit')], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        </div>
+        <a href="auth/login"><?php echo e(trans('app.Login')); ?></a>
     </div>
     <?php echo Form::close(); ?>
 

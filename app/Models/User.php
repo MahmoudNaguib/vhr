@@ -46,7 +46,7 @@ class User extends Authenticatable {
         'type' => 'required|in:recruiter,employee',
         'name' => 'required|min:4',
         'email' => 'required|email|unique:users,email',
-        'mobile' => 'required|mobile',
+        'mobile' => 'required|mobile|unique:users,mobile',
         'password' => 'required|confirmed|min:8',
     ];
     public $loginRules = [
@@ -72,13 +72,38 @@ class User extends Authenticatable {
         parent::boot();
         static::created(function ($row) {
             if (!app()->environment('testing')) {
-                 \App\Jobs\UserCreated::dispatch($row);
+              //  \App\Jobs\UserCreated::dispatch($row);
             }
         });
     }
+
+    public function register() {
+        $token = generateToken(request('email'));
+        request()->request->add([
+            'confirm_token' => md5(request('email')) . RandomString(10) . md5(time()),
+            'token' => $token,
+            'image' => resizeImage(public_path() . '/images/users/avatar.png', \App\Models\User::$attachFields['image']['sizes'])
+        ]);
+        //// if type is recruiter
+        if (request('type') == 'recruiter') {
+            request()->request->add(['is_company_admin' => 1]);
+        }
+        if ($row = \App\Models\User::create(request()->except(['password_confirmation', 'accept']))) {
+            return $row;
+        }
+    }
+
+    public function getTypes() {
+        return [
+            'recruiter' => trans('app.Recruiter'),
+            'employee' => trans('app.Employee'),
+        ];
+    }
+
     public function getCountries() {
         return \App\Models\Country::pluck('title', 'id');
     }
+
     public function getGenders() {
         return [
             'm' => trans('app.Male'),

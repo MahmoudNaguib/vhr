@@ -37,8 +37,8 @@ class AppServiceProvider extends ServiceProvider
             if (!trim($value) && intval($value) != 0) {
                 return true;
             }
-            //return (preg_match('/^([(+)0-9,\\-,+,]){4,20}$/', $value));
-            return is_numeric($value);
+            return (preg_match('/^([(+)0-9,\\-,+,]){4,20}$/', $value));
+            //return is_numeric($value);
         });
         Validator::extend('phone', function ($attribute, $value, $parameters, $validator) {
             if ($value == '') {

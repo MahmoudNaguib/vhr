@@ -2,6 +2,14 @@
 
 use Intervention\Image\Facades\Image;
 
+
+function ValidateRequestApi($request, $rules) {
+    $validator = validator()->make($request, $rules);
+    if ($validator->fails()) {
+        throw new \App\Exceptions\ValidationApiException(json_encode(transformValidation($validator->errors()->messages())));
+    }
+}
+
 function appVersion() {
     $json = json_decode(@file_get_contents(public_path() . '/version.json'));
     return number_format(@$json->version, 2);
