@@ -8,7 +8,9 @@ class ProfileController extends \App\Http\Controllers\Controller {
     public function __construct(\App\Models\User $model) {
         $this->module = 'profile';
         $this->model = $model;
-        $this->edit = $model->edit;
+        $this->editRecruiter = $model->editRecruiter;
+        $this->editEmployee = $model->editEmployee;
+        $this->changePassword = $model->changePassword;
     }
 
     public function getIndex() {
@@ -24,20 +26,39 @@ class ProfileController extends \App\Http\Controllers\Controller {
 
     public function postEdit() {
         $row = $this->model->findOrFail(auth()->user()->id);
-        $this->validate(request(), $this->edit);
+        $this->validate(request(), ($row->type=='recruiter')?$this->editRecruiter:$this->editEmployee);
         if ($row->update(request()->all())) {
-            $row->completed_profile=1;
-            $row->save();
             flash()->success(trans('app.Update successfully'));
             return back();
         }
-        flash(trans('app.Failed to save'))->error();
+        flash()->error(trans('app.Failed to handle your request'));
+        return back();
+    }
+
+    public function getChangePassword() {
+        $data['row'] = $this->model->findOrFail(auth()->user()->id);
+        $data['page_title'] = trans('app.Change password');
+        return view($this->module . '.change-password', $data);
+    }
+
+    public function postChangePassword(){
+        $row = $this->model->findOrFail(auth()->user()->id);
+        $this->validate(request(), $this->changePassword);
+        if (!\Hash::check(request('old_password'), $row->password)) {
+            flash()->error(trans('app.Entered password is not matching your old password'));
+            return back();
+        }
+        if ($row->update(request()->except(['password_confirmation','old_password']))) {
+            flash(trans('app.Update successfully'))->success();
+            return back();
+        }
+        flash()->error(trans('app.Failed to handle your request'));
         return back();
     }
 
     public function getLogout() {
         auth()->logout();
         session()->flush();
-        return redirect('/auth/login');
+        return redirect('auth/login');
     }
 }

@@ -17,9 +17,6 @@ class UserResource extends JsonResource {
             'type' => 'users',
             'id' => $this->id,
             'attributes' => [
-                'role_id'=>$this->role_id,
-                'company_id'=>$this->company_id,
-                'is_company_admin'=>$this->is_company_admin,
                 'type' => $this->type,
                 'name' => $this->name,
                 'email' => $this->email,
@@ -28,7 +25,6 @@ class UserResource extends JsonResource {
                 'last_logged_in_at' => $this->last_logged_in_at,
                 'last_ip' => $this->last_ip,
                 'created_at' =>date('Y-m-d',strtotime($this->created_at)),
-                'token' => $this->token,
                 /////////////////////////// Profile
                 'gender'=>$this->gender,
                 'country_id'=>$this->country_id,
@@ -42,7 +38,7 @@ class UserResource extends JsonResource {
                 /// ///////////////////////
             ],
             'relationships' => [
-                'company' => new TinyCompanyResource($this->whenLoaded('company')),
+                //'company' => new TinyCompanyResource($this->whenLoaded('company')),
                 'country' => new TinyCountryResource($this->whenLoaded('country')),
             ],
             'token'=>token(),

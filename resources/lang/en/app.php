@@ -62,4 +62,9 @@ return [
     'Bio' => 'Bio',
     'Youtube video link' => 'Youtube video link',
     'Image' => 'Image',
+    'Log out successfully' => 'Log out successfully',
+    'Unauthorized user' => 'Unauthorized user',
+    'Please check your email to confirm your account' => 'Please check your email to confirm your account',
+    'Entered password is not matching your old password' => 'Entered password is not matching your old password',
+    'Old password' => 'Old password',
 ];

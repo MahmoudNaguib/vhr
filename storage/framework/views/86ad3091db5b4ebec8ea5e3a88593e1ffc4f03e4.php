@@ -2,7 +2,7 @@
     <h2><?php echo e($page_title); ?></h2>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-    <?php echo Form::open(['method' => 'post','files' => true] ); ?>
+    <?php echo Form::model($row,['method' => 'post','files' => true] ); ?>
 
     <?php echo e(csrf_field()); ?>
 
@@ -12,9 +12,7 @@
     <?php echo $__env->make('form.password',['name'=>'password_confirmation','attributes'=>['class'=>'form-control','label'=>trans('app.Password confirmation'),'placeholder'=>trans('app.Password confirmation'),'autocomplete'=>"off",'required'=>1]], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <div class="form-group mt-3">
-        <div class="form-group mt-3">
-            <?php echo $__env->make('form.submit',['label'=>trans('Submit')], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-        </div>
+        <?php echo $__env->make('form.submit',['label'=>trans('Submit')], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <a href="auth/login"><?php echo e(trans('app.Login')); ?></a>
     </div>
     <?php echo Form::close(); ?>

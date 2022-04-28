@@ -97,7 +97,6 @@ class AuthController extends Controller {
             return response()->json([
                 'message' => trans('app.Account with this email is not confirmed')
             ], 403);
-
         }
         if (!$row->is_active) {
             return response()->json([

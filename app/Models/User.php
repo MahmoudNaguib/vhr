@@ -37,9 +37,22 @@ class User extends Authenticatable {
             'sizes' => ['large' => 'resize,300x300', 'small' => 'crop,150x150'],
         ],
     ];
-    public $edit = [
+    public $editRecruiter = [
+        'gender' => 'required|in:m,f',
         'name' => 'required|min:4',
         'mobile' => 'required|mobile',
+        'image' => 'nullable|image|max:4000'
+    ];
+    public $editEmployee = [
+        'gender' => 'required|in:m,f',
+        'name' => 'required|min:4',
+        'mobile' => 'required|mobile',
+        'country_id'=>'required',
+        'city'=>'required',
+        'national_id'=>'required',
+        'birth_date'=>'required|date|before_or_equal:2010-01-01',
+        'degree'=>'required',
+        'bio'=>'required',
         'image' => 'nullable|image|max:4000'
     ];
     public $rules = [
@@ -60,7 +73,7 @@ class User extends Authenticatable {
     public $resetRules = [
         'password' => 'required|confirmed|min:8',
     ];
-    public $changePasswordRules = [
+    public $changePassword = [
         'old_password' => 'required|min:8',
         'password' => 'required|confirmed|min:8',
     ];
@@ -72,7 +85,7 @@ class User extends Authenticatable {
         parent::boot();
         static::created(function ($row) {
             if (!app()->environment('testing')) {
-              //  \App\Jobs\UserCreated::dispatch($row);
+                \App\Jobs\UserCreated::dispatch($row);
             }
         });
     }
@@ -138,7 +151,7 @@ class User extends Authenticatable {
     }
 
     public function includes() {
-        return $this->with(['company', 'country']);
+        return $this->with(['country']);
     }
 
     public function notifications() {
@@ -219,7 +232,7 @@ class User extends Authenticatable {
     }
 
     public function updateToken($row) {
-        $row->token = generateToken(request('email'));
+        $row->token = generateToken($row->email);
         $row->save();
         request()->headers->set('Authorization', 'Bearer ' . $row->token);
     }
