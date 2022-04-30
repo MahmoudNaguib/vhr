@@ -15,8 +15,8 @@ class CreateNotificationsTable extends Migration {
         Schema::create('notifications', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->index()->nullable();
-            $table->text('title')->nullable();
-            $table->text('content')->nullable();
+            $table->tinyText('title')->nullable();
+            $table->mediumText('content')->nullable();
             $table->boolean('send_email')->nullable()->default(0)->index();
             $table->boolean('send_push')->nullable()->default(0)->index();
             $table->string('entity_type')->nullable()->index();

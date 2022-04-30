@@ -8,14 +8,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Notification extends BaseModel {
     protected $table = "notifications";
     protected $guarded = [
+        'deleted_at',
     ];
     protected $hidden = [
+        'deleted_at',
     ];
 
     public static function boot() {
         parent::boot();
         static::created(function ($row) {
-            \App\Jobs\NotificationCreated::dispatch($row);
+            // \App\Jobs\NotificationCreated::dispatch($row);
         });
     }
 

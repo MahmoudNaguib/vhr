@@ -51,11 +51,20 @@
 
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="profile"><?php echo e(trans('app.Dashboard')); ?></a></li>
+                            <li><a class="dropdown-item" href="dashboard"><?php echo e(trans('app.Dashboard')); ?></a></li>
                             <li><a class="dropdown-item" href="profile/change-password"><?php echo e(trans('app.Change password')); ?></a></li>
                             <li><a class="dropdown-item" href="profile/edit"><?php echo e(trans('app.Edit account')); ?></a></li>
                             <li><a class="dropdown-item" href="profile/logout"><?php echo e(trans('app.Logout')); ?></a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <?php
+                        $notificationsCount=\App\Models\Notification::where('user_id',auth()->user()->id)->unreaded()->count();
+                        ?>
+                        <a href="notifications" class="nav-link" aria-current="page">
+                            <i class="fa fa-bell"></i>
+                            <span class="indicator"><?php echo e($notificationsCount); ?></span>
+                        </a>
                     </li>
                 <?php endif; ?>
             </ul>

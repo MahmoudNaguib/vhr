@@ -15,4 +15,7 @@ class BaseModel extends Model {
     public function getCountries() {
         return \App\Models\Country::pluck('title', 'id');
     }
+    public function getIndustries() {
+        return \App\Models\Industry::pluck('title', 'id');
+    }
 }

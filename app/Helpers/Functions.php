@@ -233,3 +233,15 @@ function image($img, $size = '', $attributes = Null) {
     }
     return '<img src="' . $src . '" ' . $others . '>';
 }
+
+function fileRender($file) {
+    if (!$file)
+        return '';
+    $path = 'uploads/'.$file;
+    if (!$file || !file_exists($path)) {
+        return '&nbsp;-----';
+    }
+    return '<i class="fa fa-paperclip"></i>
+        <a href="download/file/' . $file . '" >' . $file . '</a>';
+}
+

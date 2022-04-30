@@ -48,12 +48,12 @@ function insertDefaultUsers() {
     $superAdminUser = [
         'role_id' => 1,
         'company_id' => null,
-        'is_company_admin'=>0,
+        'is_company_admin' => 0,
         'type' => null,
         'name' => 'Super admin',
         'email' => 'super@demo.com',
         'token' => generateToken('super@demo.com'),
-        'mobile' => '0122'.rand(1000000,9999999),
+        'mobile' => '0122' . rand(1000000, 9999999),
         'password' => bcrypt('demo@12345'),
         'confirmed' => 1,
         'is_active' => 1,
@@ -64,12 +64,12 @@ function insertDefaultUsers() {
     $adminUser = [
         'role_id' => 2,
         'company_id' => null,
-        'is_company_admin'=>0,
+        'is_company_admin' => 0,
         'type' => null,
         'name' => 'Admin',
         'email' => 'admin@demo.com',
         'token' => generateToken('admin@demo.com'),
-        'mobile' => '0122'.rand(1000000,9999999),
+        'mobile' => '0122' . rand(1000000, 9999999),
         'password' => bcrypt('demo@12345'),
         'confirmed' => 1,
         'is_active' => 1,
@@ -80,12 +80,12 @@ function insertDefaultUsers() {
     $recruiterUser = [
         'role_id' => null,
         'company_id' => 1,
-        'is_company_admin'=>1,
+        'is_company_admin' => 1,
         'type' => 'recruiter',
         'name' => 'Recruiter',
         'email' => 'recruiter@demo.com',
         'token' => generateToken('recruiter@demo.com'),
-        'mobile' => '0122'.rand(1000000,9999999),
+        'mobile' => '0122' . rand(1000000, 9999999),
         'password' => bcrypt('demo@12345'),
         'confirmed' => 1,
         'is_active' => 1,
@@ -96,12 +96,12 @@ function insertDefaultUsers() {
     $employeeUser = [
         'role_id' => null,
         'company_id' => null,
-        'is_company_admin'=>0,
+        'is_company_admin' => 0,
         'type' => 'employee',
         'name' => 'Employee',
         'email' => 'employee@demo.com',
         'token' => generateToken('employee@demo.com'),
-        'mobile' => '0122'.rand(1000000,9999999),
+        'mobile' => '0122' . rand(1000000, 9999999),
         'password' => bcrypt('demo@12345'),
         'confirmed' => 1,
         'is_active' => 1,
@@ -134,14 +134,14 @@ function insertDefaultRoles() {
             'title' => 'Super Administrator',
             'permissions' => json_encode(permissions()),
             'is_default' => 1,
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 2,
             'title' => 'Administrators',
             'permissions' => json_encode(permissions()),
             'is_default' => 1,
-            'created_by'=>1,
+            'created_by' => 1,
         ]
     ];
     \DB::table('roles')->insert($rows);
@@ -151,6 +151,7 @@ function insertDefaultCompanies() {
     $rows = [
         [
             'id' => 1,
+            'user_id' => 3,
             'title' => 'Company 1',
             'industry_id' => 1,
             'country_id' => 62,
@@ -161,9 +162,8 @@ function insertDefaultCompanies() {
             'facebook' => 'https://facebook.com',
             'instagram' => 'https://instagram.com',
             'image' => resizeImage(public_path() . '/images/companies/' . rand(1, 3) . '.png', \App\Models\Company::$attachFields['image']['sizes']),
-            'commercial_registry' => 'commercial_registry.jpg',
-            'tax_id_card' => 'tax_id_card.jpg',
-            'created_by'=>3
+            'commercial_registry' => 'commercial_registry.png',
+            'tax_id_card' => 'tax_id_card.png',
         ],
     ];
     \DB::table('companies')->insert($rows);
@@ -190,82 +190,82 @@ function insertDefaultIndustries() {
         [
             'id' => 1,
             'title' => 'Telecom',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 2,
             'title' => 'Medical',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 3,
             'title' => 'Transportation',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 4,
             'title' => 'Advertising',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 5,
             'title' => 'Agriculture',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 6,
             'title' => 'Communications',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 7,
             'title' => 'Construction',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 8,
             'title' => 'Education',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 9,
             'title' => 'Fashion',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 10,
             'title' => 'Finance',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 11,
             'title' => 'Food',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 12,
             'title' => 'Hospitality',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 13,
             'title' => 'Infrastructure',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 14,
             'title' => 'IT/Software',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 15,
             'title' => 'Manufacturing',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
         [
             'id' => 16,
             'title' => 'Retail',
-            'created_by'=>1,
+            'created_by' => 1,
         ],
     ];
     \DB::table('industries')->insert($rows);

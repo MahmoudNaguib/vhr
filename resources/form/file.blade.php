@@ -6,21 +6,19 @@
         </span>
     </label>
     <div class="col-sm-9">
-        <div class="custom-file">
-            {!! Form::file($name,$attributes)!!}
-            @if(!$errors->isEmpty())
-                @foreach($errors->get($name) as $message)
+        {!! Form::File($name)!!}
+        @if(@$errors)
+            @foreach($errors->get($name) as $message)
                 <span class='help-inline text-danger'>{{ $message }}</span>
-                @endforeach
-                <br>
-            @endif
-
-            @php
-            $value=(@$attributes['value'])?:$row->$name;
-            @endphp
-            <span class="imagePreview">
-                {!! image($value,'small',['width'=>75]) !!}
-            </span>
-        </div>
+            @endforeach
+        @endif
+        @if(isset($attributes['text']))
+            <span class='help-inline'>{{$attributes['text']}}</span>
+        @endif
     </div>
 </div>
+
+
+
+
+

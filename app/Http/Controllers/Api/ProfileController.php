@@ -37,6 +37,10 @@ class ProfileController extends Controller {
         $row = $this->model->findOrFail(auth()->user()->id);
         ValidateRequestApi(request()->all(), ($row->type == 'recruiter') ? $this->editRecruiter : $this->editEmployee);
         if ($row->update(request()->all())) {
+            if($row->type=='employee') {
+                $row->completed_profile = 1;
+                $row->save();
+            }
             return response()->json([
                 'message' => trans('app.Update successfully'),
                 'data' => new \App\Http\Resources\UserResource($this->model->includes()->findOrFail($row->id)),

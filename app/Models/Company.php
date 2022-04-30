@@ -3,7 +3,7 @@
 namespace App\Models;
 
 class Company extends BaseModel {
-    use \App\Models\Traits\CreatedBy;
+    use \App\Models\Traits\HasAttach;
 
     protected $table = "companies";
     protected $guarded = [
@@ -12,7 +12,7 @@ class Company extends BaseModel {
     protected $hidden = [
         'deleted_at',
     ];
-    public $rules = [
+    public $edit = [
         'title' => 'required',
         'industry_id' => 'required',
         'country_id' => 'required',
@@ -20,7 +20,7 @@ class Company extends BaseModel {
         'address' => 'required',
         'commercial_registry' => 'required|max:4000',
         'tax_id_card' => 'required|max:4000',
-        'image' => 'required|image|max:4000',
+        'image' => 'nullable|image|max:4000',
     ];
     static $attachFields = [
         'image' => [
@@ -33,22 +33,27 @@ class Company extends BaseModel {
             'path' => 'uploads',
         ],
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id')->withTrashed()->withDefault();
+    }
+
     public function industry() {
-        return $this->belongsTo(Industry::class, 'industry_id')->withDefault();
+        return $this->belongsTo(Industry::class, 'industry_id')->withTrashed()->withDefault();
     }
 
     public function country() {
-        return $this->belongsTo(Country::class, 'country_id')->withDefault();
+        return $this->belongsTo(Country::class, 'country_id')->withTrashed()->withDefault();
     }
 
     public function includes() {
-        return $this->with(['industry','country','creator']);
+        return $this->with(['industry', 'country', 'user']);
     }
 
     public function scopeFilterAndSort() {
         return $this->includes()
-            ->when(request('created_by'), function ($q) {
-                return $q->where('created_by', request('created_by'));
+            ->when(request('user_id'), function ($q) {
+                return $q->where('user_id', request('user_id'));
             })
             ->when(request('industry_id'), function ($q) {
                 return $q->where('industry_id', request('industry_id'));

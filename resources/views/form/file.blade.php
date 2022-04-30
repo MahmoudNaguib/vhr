@@ -14,12 +14,15 @@
                 @endforeach
                 <br>
             @endif
-
             @php
-            $value=(@$attributes['value'])?:$row->$name;
+                $value=(@$attributes['value'])?:$row->$name;
             @endphp
-            <span class="imagePreview">
-                {!! image($value,'small',['width'=>75]) !!}
+            <span class="preview">
+                 @if(@$attributes['file_type'] == 'attachment')
+                    {!! fileRender($value) !!}
+                 @else
+                 {!! image($value,'small',['width'=>50]) !!}
+                 @endif
             </span>
         </div>
     </div>

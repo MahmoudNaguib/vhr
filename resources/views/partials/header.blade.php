@@ -46,11 +46,20 @@
                             {{trans('app.Welcome')}} {{auth()->user()->name}}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="profile">{{trans('app.Dashboard')}}</a></li>
+                            <li><a class="dropdown-item" href="dashboard">{{trans('app.Dashboard')}}</a></li>
                             <li><a class="dropdown-item" href="profile/change-password">{{trans('app.Change password')}}</a></li>
                             <li><a class="dropdown-item" href="profile/edit">{{trans('app.Edit account')}}</a></li>
                             <li><a class="dropdown-item" href="profile/logout">{{trans('app.Logout')}}</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        @php
+                        $notificationsCount=\App\Models\Notification::where('user_id',auth()->user()->id)->unreaded()->count();
+                        @endphp
+                        <a href="notifications" class="nav-link" aria-current="page">
+                            <i class="fa fa-bell"></i>
+                            <span class="indicator">{{$notificationsCount}}</span>
+                        </a>
                     </li>
                 @endif
             </ul>

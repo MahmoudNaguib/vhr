@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder {
     public function run() {
         $this->call(BasicSeeder::class);
         if (app()->environment() != 'production' && app()->environment() != 'testing') {
-
+            $this->call(NotificationsSeeder::class);
         }
     }
 }

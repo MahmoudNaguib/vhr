@@ -70,7 +70,7 @@ class AuthController extends \App\Http\Controllers\Controller {
         if ($row->update($data)) {
             auth()->login($row,request('remember_me'));
             flash()->success(trans('app.Welcome') . ' ' . auth()->user()->name);
-            return redirect('profile');
+            return redirect('dashboard');
         }
         flash()->error(trans('app.Failed to handle your request'));
         return back();

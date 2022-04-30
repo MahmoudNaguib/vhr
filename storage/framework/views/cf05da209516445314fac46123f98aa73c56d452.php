@@ -17,13 +17,17 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <br>
             <?php endif; ?>
-
             <?php
-            $value=(@$attributes['value'])?:$row->$name;
+                $value=(@$attributes['value'])?:$row->$name;
             ?>
-            <span class="imagePreview">
-                <?php echo image($value,'small',['width'=>75]); ?>
+            <span class="preview">
+                 <?php if(@$attributes['file_type'] == 'attachment'): ?>
+                    <?php echo fileRender($value); ?>
 
+                 <?php else: ?>
+                 <?php echo image($value,'small',['width'=>50]); ?>
+
+                 <?php endif; ?>
             </span>
         </div>
     </div>
