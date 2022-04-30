@@ -1,0 +1,2 @@
+<?php echo $__env->make('form.input',['name'=>'title','type'=>'text','attributes'=>['class'=>'form-control','label'=>trans('app.Title'),'placeholder'=>trans('app.Title'),'autocomplete'=>"off",'required'=>1]], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php /**PATH /opt/lampp/htdocs/vhr/resources/views/admin/industries/form.blade.php ENDPATH**/ ?>

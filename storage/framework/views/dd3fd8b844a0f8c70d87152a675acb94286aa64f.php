@@ -1,39 +1,28 @@
-<!-- NAVBAR-->
-<nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
-    <div class="container">
-        <a href="#" class="navbar-brand">
-            <img src="uploads/small/<?php echo e(conf('logo')); ?>" height="40" alt="Logo" class="d-inline-block align-middle mr-2">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a href="<?php echo e(app()->make("url")->to('/')); ?>" class="navbar-brand">
+            <img src="uploads/small/<?php echo e(conf('logo')); ?>" height="40" alt="<?php echo e(conf('app_name')); ?>" class="d-inline-block align-middle mr-2">
         </a>
-        <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
-
-        <div id="navbarSupportedContent" class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a href="<?php echo e(app()->make("url")->to('/')); ?>" class="nav-link">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="<?php echo e(app()->make("url")->to('/')); ?>" class="nav-link <?php echo e((request()->is('/'))?'active':''); ?>">
                         <?php echo e(trans('app.Home')); ?>
 
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="about" class="nav-link">
+                    <a href="about" class="nav-link <?php echo e((request()->is('/about'))?'active':''); ?>">
                         <?php echo e(trans('app.About')); ?>
 
                     </a>
                 </li>
-                <?php if(!auth()->guest()): ?>
-                    <?php if(auth()->user()->role_id): ?>
-                        <li class="nav-item">
-                            <a href="admin/roles" class="nav-link">
-                                <?php echo e(trans('app.Roles')); ?>
-
-                            </a>
-                        </li>
-                    <?php endif; ?>
-                <?php endif; ?>
                 <?php if(auth()->guest()): ?>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle <?php echo e((request()->is('auth/*'))?'active':''); ?>" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
                             <?php echo e(trans('app.Login')); ?>
 
@@ -45,7 +34,7 @@
                     </li>
                 <?php else: ?>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle <?php echo e((request()->is('profile/*') || request()->is('dashbard'))?'active':''); ?>" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
                             <?php echo e(trans('app.Welcome')); ?> <?php echo e(auth()->user()->name); ?>
 
@@ -59,9 +48,9 @@
                     </li>
                     <li class="nav-item">
                         <?php
-                        $notificationsCount=\App\Models\Notification::where('user_id',auth()->user()->id)->unreaded()->count();
+                            $notificationsCount=\App\Models\Notification::where('user_id',auth()->user()->id)->unreaded()->count();
                         ?>
-                        <a href="notifications" class="nav-link" aria-current="page">
+                        <a href="notifications" class="nav-link <?php echo e((request()->is('notifications*'))?'active':''); ?>" aria-current="page">
                             <i class="fa fa-bell"></i>
                             <span class="indicator"><?php echo e($notificationsCount); ?></span>
                         </a>
@@ -71,7 +60,4 @@
         </div>
     </div>
 </nav>
-
-
-
 <?php /**PATH /opt/lampp/htdocs/vhr/resources/views/partials/header.blade.php ENDPATH**/ ?>

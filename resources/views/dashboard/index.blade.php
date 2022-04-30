@@ -3,6 +3,5 @@
     <h2>{{$page_title}}</h2>
 @endsection
 @section('content')
-    User dashboard
+    @include('dashboard.'.auth()->user()->type)
 @endsection
-

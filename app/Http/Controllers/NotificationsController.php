@@ -12,10 +12,29 @@ class NotificationsController extends \App\Http\Controllers\Controller {
     }
 
     public function getIndex() {
-        $data['page_title'] = $this->title.' - '.trans('app.List');
-        $data['module']=$this->module;
+        $data['page_title'] = trans('app.List') . " " . $this->title;
+        $data['module'] = $this->module;
         $data['rows'] = $this->model->filterAndSort()->own()->paginate(env('PAGE_LIMIT'));
         return view($this->module . '.index', $data);
     }
 
+    public function getView($id) {
+        $data['page_title'] = trans('app.View') . " " . $this->title;
+        $data['breadcrumb'] = [$this->title => $this->module];
+        $data['module'] = $this->module;
+        $data['row'] = $this->model->own()->findOrFail($id);
+        if ($data['row']) {
+            $data['row']->seen_at = date("Y-m-d H:i:s");
+            $data['row']->save();
+        }
+        return view($this->module . '.view', $data);
+    }
+
+    public function getDelete($id) {
+        $row = $this->model->own()->findOrFail($id);
+        if($row->delete()){
+            flash()->success(trans('app.Deleted Successfully'));
+            return back();
+        }
+    }
 }

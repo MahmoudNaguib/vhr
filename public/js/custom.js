@@ -1,8 +1,28 @@
 $(function () {
-    function confirmation() {
-        $('a[data-confirm]').on('click', function () {
-            console.log('confirm clicked');
-            var href = $(this).attr('href');
+    $('#master').on('click', function (e) {
+        if ($(this).is(':checked', true)) {
+            $(".sub_chk").prop('checked', true);
+        } else {
+            $(".sub_chk").prop('checked', false);
+        }
+    });
+    $('.sub_chk').on('click', function (e) {
+        var numberOfChecked = $('.sub_chk:checked').length;
+
+        if (numberOfChecked > 0) {
+            $("#master").prop('checked', true);
+        } else {
+            $("#master").prop('checked', false);
+        }
+    });
+    $('.delete_all').on('click', function (e) {
+        var ids = [];
+        $(".sub_chk:checked").each(function () {
+            ids.push($(this).attr('data-id'));
+        });
+
+        if (ids.length > 0) {
+            var href = $(this).attr('href') + '?ids=' + ids;
             if (!$('#dataConfirmModal').length) {
                 $('body').append('<div class="modal fade" id="dataConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">\n' +
                     '  <div class="modal-dialog modal-dialog-centered modal-sm">\n' +
@@ -22,7 +42,6 @@ $(function () {
                     '  </div>\n' +
                     '</div>');
             }
-
             $('#dataConfirmModal').find('.modal-body .content').html($(this).attr('data-confirm'));
             $('#dataConfirmOK').attr('href', href);
             var myModal = new bootstrap.Modal(document.getElementById('dataConfirmModal'), {
@@ -30,10 +49,8 @@ $(function () {
             })
             myModal.show();
             return false;
-        });
-    }
-
-    confirmation();
+        }
+    });
 });
 
 

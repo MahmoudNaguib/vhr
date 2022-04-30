@@ -8,7 +8,7 @@
 
         </div>
         <div class="grid-responsive">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped">
                 <thead>
                 <tr>
                     <th class="ml-1"><?php echo e(trans('app.ID')); ?> </th>

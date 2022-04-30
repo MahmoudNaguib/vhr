@@ -20,6 +20,9 @@ class CompletedProfile{
         if (!$row) {
             return redirect('auth/login');
         }
+        if(auth()->user()->type=='admin'){
+            return $next($request);
+        }
         if(auth()->user()->completed_profile==1){
             return $next($request);
         }

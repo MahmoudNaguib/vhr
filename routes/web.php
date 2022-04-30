@@ -18,6 +18,18 @@ AdvancedRoute::controller('download', \App\Http\Controllers\DownloadController::
 
 Route::group(['middleware' => ['auth']], function () {
     AdvancedRoute::controller('profile', \App\Http\Controllers\ProfileController::class);
+
+    ////////////// Admin Routes
+    Route::group(['prefix' => 'admin','middleware' => ['IsSuperAdmin']], function () {
+        AdvancedRoute::controller('roles', \App\Http\Controllers\Admin\RolesController::class);
+    });
+    Route::group(['prefix' => 'admin','middleware' => ['IsAdmin']], function () {
+        AdvancedRoute::controller('countries', \App\Http\Controllers\Admin\CountriesController::class);
+        AdvancedRoute::controller('industries', \App\Http\Controllers\Admin\IndustriesController::class);
+    });
+    ////////////// End Admin Routes
+
+
     Route::group(['middleware' => ['RecruiterUser']], function () {
         AdvancedRoute::controller('company', \App\Http\Controllers\CompanyController::class);
     });

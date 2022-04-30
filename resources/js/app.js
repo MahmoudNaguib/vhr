@@ -1,6 +1,5 @@
 $(function () {
     'use strict';
-
     $('form').submit(function () {
         $(this).find("button").prop('disabled', true);
     });
@@ -13,43 +12,37 @@ $(function () {
         changeYear: true,
         yearRange: 'c-90:c+10',
     });
-    // Datatable
-    /*var table = $('.dataTable').DataTable({
-        responsive: true,
-        language: {
-            searchPlaceholder: 'Search...',
-            sSearch: '',
-        },
-        "order": [[0, 'desc']]
-    });
-    table.on('draw', function () {
-        confirmation();
-    });
-    $('.dataTables_length select').select2({minimumResultsForSearch: Infinity});*/
-    // Select2
+    function confirmation() {
+        $('a[data-confirm]').on('click', function () {
+            var href = $(this).attr('href');
+            if (!$('#dataConfirmModal').length) {
+                $('body').append('<div class="modal fade" id="dataConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">\n' +
+                    '  <div class="modal-dialog modal-dialog-centered modal-sm">\n' +
+                    '    <div class="modal-content">\n' +
+                    '      <div class="d-flex justify-content-center mt-2">\n' +
+                    '        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>\n' +
+                    '      </div>\n' +
+                    '      <div class="modal-body">\n' +
+                    '        <div class="content d-flex justify-content-center"></div>' +
+                    '        <div class="buttons d-flex justify-content-center mt-3">' +
+                    '           <a class="btn btn-lg btn-danger" data-bs-dismiss="modal"><i class="fa fa-times"></i></a>' +
+                    '&nbsp; &nbsp; &nbsp; &nbsp;'+
+                    '           <a class="btn btn-lg btn-success" id="dataConfirmOK"><i class="fa fa-check"></i></a>' +
+                    '</div>' +
+                    '      </div>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '</div>');
+            }
 
-
-    /*
-        $('.editor').trumbowyg({
-            svgPath: 'svg/icons.svg',
-            btns: [
-                // ['viewHTML'],
-                ['formatting'],
-                ['strong', 'em', 'del'],
-                ['superscript', 'subscript'],
-                ['link'],
-                ['removeformat'],
-                ['insertImage'],
-                ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-                ['unorderedList', 'orderedList'],
-                ['fullscreen']
-                // ['horizontalRule'],
-            ]
+            $('#dataConfirmModal').find('.modal-body .content').html($(this).attr('data-confirm'));
+            $('#dataConfirmOK').attr('href', href);
+            var myModal = new bootstrap.Modal(document.getElementById('dataConfirmModal'), {
+                keyboard: false
+            })
+            myModal.show();
+            return false;
         });
-    */
-    /*
-        $('.timepicker').timepicker({'disableTextInput': true, 'scrollDefault': 'now', 'step': 15, 'timeFormat': 'h:i A'});
-    */
-
-    /*$('.tags').tagsinput();*/
+    }
+    confirmation();
 });

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-3">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -6,11 +6,10 @@
             </li>
             @if(@$breadcrumb)
                 @foreach ($breadcrumb as $key=>$value)
-                    <li class="breadcrumb-item"><a href="{{lang()}}/{{ $value }}">{{ $key }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ $value }}">{{ $key }}</a></li>
                 @endforeach
             @endif
             <li class="breadcrumb-item active" aria-current="page">{!! @$page_title !!}</li>
         </ol>
-        @yield('title')
     </nav>
 </div>

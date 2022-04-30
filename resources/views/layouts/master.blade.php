@@ -7,9 +7,13 @@
 </head>
 <body>
 @include('partials.header')
+@include('partials.breadcrumb')
 <div class="main">
-    <div class="container mt-5">
+    <div class="container mt-3">
         @include('partials.flash_messages')
+        <div class="container mb-2">
+            @include('partials.inner-navigation')
+        </div>
         @yield('title')
         @yield('content')
     </div>

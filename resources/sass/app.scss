@@ -11,3 +11,20 @@ form.delete_form{
     height: 40px;
     padding-top: 5px;
 }
+.single-row table tr td:first-child{
+    font-weight: bold;
+}
+.footer .social-links{
+    display: inline-flex;
+    flex-wrap: wrap;
+    padding: 0 0;
+    margin-bottom: 1rem;
+    list-style: none;
+    text-align: center;
+}
+.footer .social-links a{
+    color: gray;
+}
+
+@import "grid-responsive";
+@import "media";

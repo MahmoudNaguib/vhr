@@ -8,7 +8,7 @@
             <b>{{ trans('app.Total')}}</b>: {{$rows->total()}} {{trans('app.records')}}
         </div>
         <div class="grid-responsive">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped">
                 <thead>
                 <tr>
                     <th class="ml-1">{{trans('app.ID')}} </th>
@@ -47,7 +47,7 @@
             {!! $rows->render() !!}
         </div>
     @else
-        {{locale("app.There is no results")}}
+        {{trans("app.There is no results")}}
     @endif
 @endsection
 

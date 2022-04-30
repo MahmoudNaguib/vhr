@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration {
             $table->bigInteger('role_id')->nullable()->index();
             $table->bigInteger('company_id')->nullable()->index();
             $table->boolean('is_company_admin')->nullable()->default(0)->index();
-            $table->enum('type', ['recruiter','employee'])->nullable()->index();
+            $table->enum('type', ['admin','recruiter','employee'])->nullable()->index();
             $table->string('name')->nullable();
             $table->string('email')->nullable()->unique();
             $table->string('mobile')->nullable();

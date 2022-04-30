@@ -2,6 +2,11 @@
 
 use Intervention\Image\Facades\Image;
 
+function toRoleID($txt) {
+    $txt = str_replace(' ', '_', $txt);
+    $txt = str_replace('/', '_', $txt);
+    return $txt;
+}
 
 function ValidateRequestApi($request, $rules) {
     $validator = validator()->make($request, $rules);
