@@ -18,6 +18,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <?php if(can('view-'.$module)): ?>
+        <?php echo $__env->make('admin.'.$module.'.partials.filters',['row'=>@$row], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php if(!$rows->isEmpty()): ?>
             <div>
                 <div class="float-end">
@@ -82,7 +83,7 @@
                 </table>
             </div>
             <div class="d-flex justify-content-center">
-                <?php echo $rows->render(); ?>
+                <?php echo $rows->appends(['title'=>request('title')])->links(); ?>
 
             </div>
         <?php else: ?>

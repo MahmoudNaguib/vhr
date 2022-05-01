@@ -21,6 +21,11 @@ class CreateRolesTable extends Migration {
             $table->timestamp('updated_at')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('deleted_at')->nullable()->index();
         });
+        if (app()->environment() != 'testing') {
+            Schema::table('roles', function (Blueprint $table) {
+                \DB::statement('ALTER TABLE roles ADD FULLTEXT search(title)');
+            });
+        }
     }
 
     /**

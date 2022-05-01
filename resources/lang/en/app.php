@@ -108,4 +108,13 @@ return [
     'Youtube video link' => 'Youtube video link',
     'Code' => 'Code',
     'Industries' => 'Industries',
+    'Users' => 'Users',
+    'Admin' => 'Admin',
+    'Role' => 'Role',
+    'Select type' => 'Select type',
+    'Filter' => 'Filter',
+    'Reset' => 'Reset',
+    'Filter by' => 'Filter by',
+    'Companies' => 'Companies',
+    'Facebook' => 'Facebook',
 ];

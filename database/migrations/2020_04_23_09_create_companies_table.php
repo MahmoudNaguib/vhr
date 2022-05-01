@@ -13,7 +13,6 @@ class CreateCompaniesTable extends Migration {
     public function up() {
         Schema::create('companies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->nullable()->index();
             $table->string('title')->nullable();
             $table->bigInteger('industry_id')->nullable()->index();
             $table->bigInteger('country_id')->nullable()->index();
@@ -28,10 +27,16 @@ class CreateCompaniesTable extends Migration {
             $table->string('instagram')->nullable();
             $table->string('image')->nullable();
             ///////// Optional parameters
+            $table->bigInteger('plan_id')->nullable()->index();
             $table->timestamp('created_at')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('deleted_at')->nullable()->index();
         });
+        if (app()->environment() != 'testing') {
+            Schema::table('companies', function (Blueprint $table) {
+                \DB::statement('ALTER TABLE companies ADD FULLTEXT search(title)');
+            });
+        }
     }
 
     /**

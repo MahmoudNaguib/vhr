@@ -60,6 +60,7 @@ function insertDefaultUsers() {
         'created_by' => 1,
         'image' => resizeImage(public_path() . '/images/users/avatar.png', \App\Models\User::$attachFields['image']['sizes']),
         'country_id' => 62,
+        'completed_profile'=>1
     ];
     $adminUser = [
         'role_id' => 2,
@@ -76,6 +77,7 @@ function insertDefaultUsers() {
         'created_by' => 1,
         'image' => resizeImage(public_path() . '/images/users/avatar.png', \App\Models\User::$attachFields['image']['sizes']),
         'country_id' => 62,
+        'completed_profile'=>1
     ];
     $recruiterUser = [
         'role_id' => null,
@@ -92,6 +94,7 @@ function insertDefaultUsers() {
         'created_by' => 1,
         'image' => resizeImage(public_path() . '/images/users/avatar.png', \App\Models\User::$attachFields['image']['sizes']),
         'country_id' => 62,
+        'completed_profile'=>1
     ];
     $employeeUser = [
         'role_id' => null,
@@ -108,6 +111,7 @@ function insertDefaultUsers() {
         'created_by' => 1,
         'image' => resizeImage(public_path() . '/images/users/avatar.png', \App\Models\User::$attachFields['image']['sizes']),
         'country_id' => 62,
+        'completed_profile'=>1
     ];
     $users = [
         $superAdminUser,
@@ -140,7 +144,7 @@ function insertDefaultRoles() {
             'id' => 2,
             'title' => 'Administrators',
             'permissions' => json_encode(permissions()),
-            'is_default' => 1,
+            'is_default' => 0,
             'created_by' => 1,
         ]
     ];
@@ -151,7 +155,6 @@ function insertDefaultCompanies() {
     $rows = [
         [
             'id' => 1,
-            'user_id' => 3,
             'title' => 'Company 1',
             'industry_id' => 1,
             'country_id' => 62,
@@ -269,4 +272,45 @@ function insertDefaultIndustries() {
         ],
     ];
     \DB::table('industries')->insert($rows);
+}
+function insertDefaultPlans() {
+    $rows = [
+        [
+            'id' => 1,
+            'title' => 'Basic monthly',
+            'applicants_unlock_count'=>20,
+            'posts_count'=>5,
+            'duration_in_month'=>1,
+            'price'=>10,
+            'created_by' => 1,
+        ],
+        [
+            'id' => 2,
+            'title' => 'Basic annual',
+            'applicants_unlock_count'=>300,
+            'posts_count'=>50,
+            'duration_in_month'=>12,
+            'price'=>100,
+            'created_by' => 1,
+        ],
+        [
+            'id' => 3,
+            'title' => 'Silver monthly',
+            'applicants_unlock_count'=>50,
+            'posts_count'=>10,
+            'duration_in_month'=>12,
+            'price'=>15,
+            'created_by' => 1,
+        ],
+        [
+            'id' => 4,
+            'title' => 'Silver annual',
+            'applicants_unlock_count'=>700,
+            'posts_count'=>150,
+            'duration_in_month'=>1,
+            'price'=>150,
+            'created_by' => 1,
+        ],
+    ];
+    \DB::table('plans')->insert($rows);
 }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use DB;
+
 class CompaniesSeeder extends Seeder {
 
     /**
@@ -18,6 +19,9 @@ class CompaniesSeeder extends Seeder {
                 \DB::statement("ALTER TABLE companies AUTO_INCREMENT = 1");
             }
             insertDefaultCompanies();
+            \App\Models\Company::factory()
+                ->count(4)
+                ->create();
         }
     }
 }

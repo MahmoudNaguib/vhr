@@ -15,6 +15,7 @@ class RolesController extends \App\Http\Controllers\Controller {
         $data['module'] = $this->module;
         $data['page_title'] = trans('app.List') . " " . $this->title;
         $data['rows'] = $this->model->filterAndSort()->paginate(env('PAGE_LIMIT'));
+        $data['row'] = $this->model;
         return view('admin.' . $this->module . '.index', $data);
     }
 
@@ -43,7 +44,6 @@ class RolesController extends \App\Http\Controllers\Controller {
         $data['page_title'] = trans('app.Edit') . " " . $this->title;
         $data['breadcrumb'] = [$this->title => 'admin/' . $this->module];
         $data['row'] = $this->model->findOrFail($id);
-        $data['row'] = $this->model->where('is_default', 0)->findOrFail($id);
         return view('admin.' . $this->module . '.edit', $data);
     }
 

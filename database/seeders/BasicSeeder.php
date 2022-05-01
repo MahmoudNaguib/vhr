@@ -15,41 +15,49 @@ class BasicSeeder extends Seeder {
     public function run() {
         \Cache::forget('configs');
         configureUploads();
-        ///////////////////////////////////////////////////////////////// Default Configs
-        \DB::table('configs')->delete();
-        if (app()->environment() != 'testing') {
-            \DB::statement("ALTER TABLE configs AUTO_INCREMENT = 1");
+        if (app()->environment() != 'production') {
+            ///////////////////////////////////////////////////////////////// Default Configs
+            \DB::table('configs')->delete();
+            if (app()->environment() != 'testing') {
+                \DB::statement("ALTER TABLE configs AUTO_INCREMENT = 1");
+            }
+            insertDefaultConfigs();
+            ///////////////////////////////////////////////////////////////// Default Countries
+            \DB::table('countries')->delete();
+            if (app()->environment() != 'testing') {
+                \DB::statement("ALTER TABLE countries AUTO_INCREMENT = 1");
+            }
+            insertDefaultCountries();
+            ///////////////////////////////////////////////////////////////// Default industries
+            \DB::table('industries')->delete();
+            if (app()->environment() != 'testing') {
+                \DB::statement("ALTER TABLE industries AUTO_INCREMENT = 1");
+            }
+            insertDefaultIndustries();
+            ////////////////////////////////////////////////////////// Default roles
+            \DB::table('roles')->delete();
+            if (app()->environment() != 'testing') {
+                \DB::statement("ALTER TABLE roles AUTO_INCREMENT = 1");
+            }
+            insertDefaultRoles();
+            //////////////////////////////////////////////////// Default companies
+            \DB::table('companies')->delete();
+            if (app()->environment() != 'testing') {
+                DB::statement("ALTER TABLE companies AUTO_INCREMENT = 1");
+            }
+            insertDefaultCompanies();
+            //////////////////////////////////////////////////// Default users
+            \DB::table('users')->delete();
+            if (app()->environment() != 'testing') {
+                DB::statement("ALTER TABLE users AUTO_INCREMENT = 1");
+            }
+            insertDefaultUsers();
+            //////////////////////////////////////////////////// Default plans
+            \DB::table('plans')->delete();
+            if (app()->environment() != 'testing') {
+                DB::statement("ALTER TABLE plans AUTO_INCREMENT = 1");
+            }
+            insertDefaultPlans();
         }
-        insertDefaultConfigs();
-        ///////////////////////////////////////////////////////////////// Default Configs
-        \DB::table('countries')->delete();
-        if (app()->environment() != 'testing') {
-            \DB::statement("ALTER TABLE countries AUTO_INCREMENT = 1");
-        }
-        insertDefaultCountries();
-        ///////////////////////////////////////////////////////////////// Default Configs
-        \DB::table('industries')->delete();
-        if (app()->environment() != 'testing') {
-            \DB::statement("ALTER TABLE industries AUTO_INCREMENT = 1");
-        }
-        insertDefaultIndustries();
-        ////////////////////////////////////////////////////////// insert default roles
-        \DB::table('roles')->delete();
-        if (app()->environment() != 'testing') {
-            \DB::statement("ALTER TABLE roles AUTO_INCREMENT = 1");
-        }
-        insertDefaultRoles();
-        //////////////////////////////////////////////////// Insert default users
-        \DB::table('users')->delete();
-        if (app()->environment() != 'testing') {
-            DB::statement("ALTER TABLE users AUTO_INCREMENT = 1");
-        }
-        insertDefaultUsers();
-        //////////////////////////////////////////////////// Insert default companies
-        \DB::table('companies')->delete();
-        if (app()->environment() != 'testing') {
-            DB::statement("ALTER TABLE users AUTO_INCREMENT = 1");
-        }
-        insertDefaultCompanies();
     }
 }

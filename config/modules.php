@@ -18,4 +18,9 @@ return [
         'view-users' => 'View users',
         'delete-users' => 'Delete users',
     ],
+    'Companies' => [
+        'edit-companies' => 'Edit companies',
+        'view-companies' => 'View companies',
+        'delete-companies' => 'Delete companies',
+    ],
 ];

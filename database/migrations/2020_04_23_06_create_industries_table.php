@@ -19,6 +19,11 @@ class CreateIndustriesTable extends Migration {
             $table->timestamp('updated_at')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('deleted_at')->nullable()->index();
         });
+        if (app()->environment() != 'testing') {
+            Schema::table('industries', function (Blueprint $table) {
+                \DB::statement('ALTER TABLE industries ADD FULLTEXT search(title)');
+            });
+        }
     }
 
     /**

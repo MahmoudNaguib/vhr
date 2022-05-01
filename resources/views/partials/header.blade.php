@@ -36,10 +36,33 @@
                             {{trans('app.Welcome')}} {{auth()->user()->name}}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="dashboard">{{trans('app.Dashboard')}}</a></li>
-                            <li><a class="dropdown-item" href="profile/change-password">{{trans('app.Change password')}}</a></li>
-                            <li><a class="dropdown-item" href="profile/edit">{{trans('app.Edit account')}}</a></li>
-                            <li><a class="dropdown-item" href="profile/logout">{{trans('app.Logout')}}</a></li>
+                            <li>
+                                <a class="dropdown-item" href="dashboard">
+                                    {{trans('app.Dashboard')}}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="profile/edit">
+                                    {{trans('app.Edit account')}}
+                                </a>
+                            </li>
+                            @if(auth()->user()->type=='recruiter')
+                            <li>
+                                <a class="dropdown-item" href="company/edit">
+                                    {{trans('app.Edit company profile')}}
+                                </a>
+                            </li>
+                            @endif
+                            <li>
+                                <a class="dropdown-item" href="profile/change-password">
+                                    {{trans('app.Change password')}}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="profile/logout">
+                                    {{trans('app.Logout')}}
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item">

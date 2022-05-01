@@ -15,6 +15,7 @@ class CountriesController extends \App\Http\Controllers\Controller {
         $data['module'] = $this->module;
         $data['page_title'] = trans('app.List') . " " . $this->title;
         $data['rows'] = $this->model->filterAndSort()->paginate(env('PAGE_LIMIT'));
+        $data['row'] = $this->model;
         return view('admin.' . $this->module . '.index', $data);
     }
 

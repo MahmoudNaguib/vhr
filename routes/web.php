@@ -24,8 +24,10 @@ Route::group(['middleware' => ['auth']], function () {
         AdvancedRoute::controller('roles', \App\Http\Controllers\Admin\RolesController::class);
     });
     Route::group(['prefix' => 'admin','middleware' => ['IsAdmin']], function () {
+        AdvancedRoute::controller('users', \App\Http\Controllers\Admin\UsersController::class);
         AdvancedRoute::controller('countries', \App\Http\Controllers\Admin\CountriesController::class);
         AdvancedRoute::controller('industries', \App\Http\Controllers\Admin\IndustriesController::class);
+        AdvancedRoute::controller('companies', \App\Http\Controllers\Admin\CompaniesController::class);
     });
     ////////////// End Admin Routes
 

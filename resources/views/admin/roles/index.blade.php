@@ -16,6 +16,7 @@
 @endsection
 @section('content')
     @if(can('view-'.$module))
+        @include('admin.'.$module.'.partials.filters',['row'=>@$row])
         @if (!$rows->isEmpty())
             <div>
                 <div class="float-end">
@@ -78,7 +79,7 @@
                 </table>
             </div>
             <div class="d-flex justify-content-center">
-                {!! $rows->render() !!}
+                {!! $rows->appends(['title'=>request('title')])->links() !!}
             </div>
         @else
             {{trans("app.There is no results")}}

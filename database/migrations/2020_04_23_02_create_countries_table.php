@@ -20,6 +20,11 @@ class CreateCountriesTable extends Migration {
             $table->timestamp('updated_at')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('deleted_at')->nullable()->index();
         });
+        if (app()->environment() != 'testing') {
+            Schema::table('countries', function (Blueprint $table) {
+                \DB::statement('ALTER TABLE countries ADD FULLTEXT search(title,code)');
+            });
+        }
     }
 
     /**

@@ -18,13 +18,13 @@ class NotificationsSeeder extends Seeder {
             \DB::table('notifications')->delete();
             if (app()->environment() != 'testing') {
                 \DB::statement("ALTER TABLE notifications AUTO_INCREMENT = 1");
-                $users=\App\Models\User::get();
-                if($users){
-                    foreach ($users as $user){
-                        \App\Models\Notification::factory()
-                            ->count(5)
-                            ->create(['user_id'=>$user->id]);
-                    }
+            }
+            $users=\App\Models\User::get();
+            if($users){
+                foreach ($users as $user){
+                    \App\Models\Notification::factory()
+                        ->count(5)
+                        ->create(['user_id'=>$user->id]);
                 }
             }
         }

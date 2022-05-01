@@ -8,27 +8,35 @@ class CompanyController extends \App\Http\Controllers\Controller {
     public function __construct(\App\Models\Company $model) {
         $this->module = 'company';
         $this->model = $model;
-        $this->edit = $model->edit;
+        $this->rules = $model->rules;
     }
 
     public function getEdit() {
         $data['page_title'] = trans('app.Edit company profile');
-        $data['row']=\App\Models\Company::where('user_id',auth()->user()->id)->first();
-        if(!$data['row']){
-            $data['row'] =\App\Models\Company::create(['user_id'=>auth()->user()->id]);
+        if(!auth()->user()->company_id){
+            $company=\App\Models\Company::create(['title'=>'Company name']);
+            if($company){
+                \App\Models\User::where('id',auth()->user()->id)->update([
+                    'company_id'=>$company->id,
+                    'is_company_admin'=>1
+                ]);
+            }
         }
+        $user=\App\Models\User::find(auth()->user()->id);
+        $data['row']=\App\Models\Company::where('id',$user->company_id)->first();
         return view($this->module . '.edit', $data);
     }
 
     public function postEdit() {
-        $row=\App\Models\Company::where('user_id',auth()->user()->id)->first();
+        $user=\App\Models\User::find(auth()->user()->id);
+        $row=\App\Models\Company::where('id',$user->company_id)->first();
         if($row->commercial_registry){
-            $this->edit['commercial_registry']='nullable|max:4000';
+            $this->rules['commercial_registry']='nullable|max:4000';
         }
         if($row->tax_id_card){
-            $this->edit['tax_id_card']='nullable|max:4000';
+            $this->rules['tax_id_card']='nullable|max:4000';
         }
-        $this->validate(request(), $this->edit);
+        $this->validate(request(), $this->rules);
         if ($row->update(request()->all())) {
             \App\Models\User::where('id',auth()->user()->id)->update(['completed_profile'=>1]);
             flash()->success(trans('app.Update successfully'));

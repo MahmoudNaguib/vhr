@@ -3,7 +3,9 @@
 namespace App\Models;
 
 class Company extends BaseModel {
-    use \App\Models\Traits\HasAttach;
+    use
+        \Laravel\Scout\Searchable,
+        \App\Models\Traits\HasAttach;
 
     protected $table = "companies";
     protected $guarded = [
@@ -12,7 +14,7 @@ class Company extends BaseModel {
     protected $hidden = [
         'deleted_at',
     ];
-    public $edit = [
+    public $rules = [
         'title' => 'required',
         'industry_id' => 'required',
         'country_id' => 'required',
@@ -34,8 +36,11 @@ class Company extends BaseModel {
         ],
     ];
 
-    public function user() {
-        return $this->belongsTo(User::class, 'user_id')->withTrashed()->withDefault();
+    public function toSearchableArray() {
+        $array = [
+            'title' => $this->title,
+        ];
+        return $array;
     }
 
     public function industry() {
@@ -47,14 +52,11 @@ class Company extends BaseModel {
     }
 
     public function includes() {
-        return $this->with(['industry', 'country', 'user']);
+        return $this->with(['industry', 'country']);
     }
 
     public function scopeFilterAndSort() {
         return $this->includes()
-            ->when(request('user_id'), function ($q) {
-                return $q->where('user_id', request('user_id'));
-            })
             ->when(request('industry_id'), function ($q) {
                 return $q->where('industry_id', request('industry_id'));
             })
@@ -62,7 +64,7 @@ class Company extends BaseModel {
                 return $q->where('country_id', request('country_id'));
             })
             ->when(request('title'), function ($q) {
-                return $q->where('title', 'LIKE', '%' . request('title') . '%');
+                return $q->where('title', 'LIKE', '%' . trim(request('title')) . '%');
             })
             ->when(request('order_field'), function ($q) {
                 return $q->orderBy((request('order_field')), (request('order_type')) ?: 'desc');

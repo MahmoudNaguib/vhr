@@ -67,10 +67,11 @@ class AuthController extends Controller {
             request()->headers->set('Authorization', 'Bearer ' . $row->token);
             /////////////// Update Push Token
             if (request('push_token')) {
-                $pushToken = \App\Models\PushToken::where('created_by', $row->id)->where('push_token', request('push_token'))->first();
+                $pushToken = \App\Models\PushToken::where('user_id', $row->id)->where('push_token', request('push_token'))->first();
                 if (!$pushToken) {
                     \App\Models\PushToken::create([
-                        'push_token' => request('push_token')
+                        'push_token' => request('push_token'),
+                        'user_id'=>$row->id
                     ]);
                 }
             }

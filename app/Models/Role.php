@@ -3,7 +3,9 @@
 namespace App\Models;
 
 class Role extends BaseModel {
-    use \App\Models\Traits\CreatedBy;
+    use
+        \Laravel\Scout\Searchable,
+        \App\Models\Traits\CreatedBy;
 
     protected $table = "roles";
     protected $guarded = [
@@ -12,6 +14,14 @@ class Role extends BaseModel {
     protected $hidden = [
         'deleted_at',
     ];
+
+    public function toSearchableArray() {
+        $array = [
+            'title' => $this->title,
+        ];
+        return $array;
+    }
+
     public $rules = [
         'title' => 'required',
         'permissions' => 'required'
@@ -29,6 +39,9 @@ class Role extends BaseModel {
 
     public function scopeFilterAndSort() {
         return $this->where('id', '>', 1)
+            ->when(request('title'), function ($q) {
+                return $q->where('title', 'LIKE', '%' . trim(request('title')) . '%');
+            })
             ->when(request('order_field'), function ($q) {
                 return $q->orderBy((request('order_field')), (request('order_type')) ?: 'desc');
             })

@@ -40,10 +40,38 @@
 
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="dashboard"><?php echo e(trans('app.Dashboard')); ?></a></li>
-                            <li><a class="dropdown-item" href="profile/change-password"><?php echo e(trans('app.Change password')); ?></a></li>
-                            <li><a class="dropdown-item" href="profile/edit"><?php echo e(trans('app.Edit account')); ?></a></li>
-                            <li><a class="dropdown-item" href="profile/logout"><?php echo e(trans('app.Logout')); ?></a></li>
+                            <li>
+                                <a class="dropdown-item" href="dashboard">
+                                    <?php echo e(trans('app.Dashboard')); ?>
+
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="profile/edit">
+                                    <?php echo e(trans('app.Edit account')); ?>
+
+                                </a>
+                            </li>
+                            <?php if(auth()->user()->type=='recruiter'): ?>
+                            <li>
+                                <a class="dropdown-item" href="company/edit">
+                                    <?php echo e(trans('app.Edit company profile')); ?>
+
+                                </a>
+                            </li>
+                            <?php endif; ?>
+                            <li>
+                                <a class="dropdown-item" href="profile/change-password">
+                                    <?php echo e(trans('app.Change password')); ?>
+
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="profile/logout">
+                                    <?php echo e(trans('app.Logout')); ?>
+
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item">

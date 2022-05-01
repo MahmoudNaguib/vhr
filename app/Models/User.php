@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Authenticatable {
     use SoftDeletes,
+        \Laravel\Scout\Searchable,
         \App\Models\Traits\HasAttach,
         \App\Models\Traits\CreatedBy,
         HasFactory;
@@ -56,11 +57,25 @@ class User extends Authenticatable {
         'image' => 'nullable|image|max:4000'
     ];
     public $rules = [
-        'type' => 'required|in:recruiter,employee',
+        'type' => 'required|in:recruiter,employee,admin',
         'name' => 'required|min:4',
         'email' => 'required|email|unique:users,email',
         'mobile' => 'required|mobile|unique:users,mobile',
         'password' => 'required|confirmed|min:8',
+    ];
+    public $adminCreate = [
+        'type' => 'required|in:recruiter,employee,admin',
+        'name' => 'required|min:4',
+        'email' => 'required|email|unique:users,email',
+        'mobile' => 'required|mobile|unique:users,mobile',
+        'password' => 'required|confirmed|min:8',
+    ];
+    public $adminEdit = [
+        'type' => 'required|in:recruiter,employee,admin',
+        'name' => 'required|min:4',
+        'email' => 'required|email|unique:users,email',
+        'mobile' => 'required|mobile|unique:users,mobile',
+        'password' => 'nullable|confirmed|min:8',
     ];
     public $loginRules = [
         'email' => 'required|email',
@@ -80,7 +95,14 @@ class User extends Authenticatable {
     public $changeImageRules = [
         'image' => 'required|image|max:4000'
     ];
-
+    public function toSearchableArray() {
+        $array = [
+            'name' => $this->name,
+            'email' => $this->email,
+            'mobile' => $this->mobile,
+        ];
+        return $array;
+    }
     public static function boot() {
         parent::boot();
         static::created(function ($row) {
@@ -108,6 +130,7 @@ class User extends Authenticatable {
 
     public function getTypes() {
         return [
+            'admin' => trans('app.Admin'),
             'recruiter' => trans('app.Recruiter'),
             'employee' => trans('app.Employee'),
         ];
@@ -115,6 +138,10 @@ class User extends Authenticatable {
 
     public function getCountries() {
         return \App\Models\Country::pluck('title', 'id');
+    }
+
+    public function getRoles() {
+        return \App\Models\Role::pluck('title', 'id');
     }
 
     public function getGenders() {
@@ -160,17 +187,17 @@ class User extends Authenticatable {
 
     public function scopeFilterAndSort() {
         return $this->includes()
-            ->when(request('created_by'), function ($q) {
-                return $q->where('created_by', request('created_by'));
+            ->when(request('type'), function ($q) {
+                return $q->where('type', request('type'));
             })
             ->when(request('name'), function ($q) {
-                return $q->where('name', 'LIKE', '%' . request('name') . '%');
+                return $q->where('name', 'LIKE', '%' . trim(request('name')) . '%');
             })
             ->when(request('email'), function ($q) {
-                return $q->where('email', 'LIKE', '%' . request('email') . '%');
+                return $q->where('email', 'LIKE', '%' . trim(request('email')) . '%');
             })
             ->when(request('mobile'), function ($q) {
-                return $q->where('mobile', 'LIKE', '%' . request('mobile') . '%');
+                return $q->where('mobile', 'LIKE', '%' . trim(request('mobile')) . '%');
             })
             ->notSuperAdmin()
             ->when(request('order_field'), function ($q) {
@@ -221,8 +248,8 @@ class User extends Authenticatable {
             ->download($fileName . "_" . date("Y-m-d H:i:s") . '.xlsx', function ($row) {
                 return [
                     'ID' => $row->id,
+                    'Type' => $row->type,
                     'Role' => (@$row->role_id) ? $row->role->title : '',
-                    'Type' => $this->type,
                     'Name' => $row->name,
                     'Email' => $row->email,
                     'Mobile' => $row->mobile_number,
