@@ -140,6 +140,10 @@ class User extends Authenticatable {
         return \App\Models\Country::pluck('title', 'id');
     }
 
+    public function getCompanies() {
+        return \App\Models\Company::pluck('title', 'id');
+    }
+
     public function getRoles() {
         return \App\Models\Role::pluck('title', 'id');
     }

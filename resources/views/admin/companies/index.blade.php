@@ -68,7 +68,7 @@
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 @endif
-                                @if(can('edit-'.$module))
+                                @if(can('view-'.$module))
                                     <a class="btn btn-xs" href="admin/{{$module}}/view/{{$row->id}}" title="{{trans('app.View')}}">
                                         <i class="fa fa-eye"></i>
                                     </a>

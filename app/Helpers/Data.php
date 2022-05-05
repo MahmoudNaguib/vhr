@@ -10,11 +10,6 @@ function insertDefaultConfigs() {
             'created_by' => 1
         ],
         [
-            'field' => 'logo',
-            'value' => $logo,
-            'created_by' => 1
-        ],
-        [
             'field' => 'contact_email',
             'value' => env('CONTACT_EMAIL'),
             'created_by' => 1
@@ -39,31 +34,24 @@ function insertDefaultConfigs() {
             'value' => env('YOUTUBE'),
             'created_by' => 1
         ],
+        [
+            'field' => 'about',
+            'value' => 'about page content',
+            'created_by' => 1
+        ],
+        [
+            'field' => 'logo',
+            'value' => $logo,
+            'created_by' => 1
+        ],
     ];
     \DB::table('configs')->insert($rows);
 }
 
 function insertDefaultUsers() {
     $users = [];
-    $superAdminUser = [
-        'role_id' => 1,
-        'company_id' => null,
-        'is_company_admin' => 0,
-        'type' => 'admin',
-        'name' => 'Super admin',
-        'email' => 'super@demo.com',
-        'token' => generateToken('super@demo.com'),
-        'mobile' => '0122' . rand(1000000, 9999999),
-        'password' => bcrypt('demo@12345'),
-        'confirmed' => 1,
-        'is_active' => 1,
-        'created_by' => 1,
-        'image' => resizeImage(public_path() . '/images/users/avatar.png', \App\Models\User::$attachFields['image']['sizes']),
-        'country_id' => 62,
-        'completed_profile'=>1
-    ];
     $adminUser = [
-        'role_id' => 2,
+        'role_id' => 1,
         'company_id' => null,
         'is_company_admin' => 0,
         'type' => 'admin',
@@ -114,7 +102,6 @@ function insertDefaultUsers() {
         'completed_profile'=>1
     ];
     $users = [
-        $superAdminUser,
         $adminUser,
         $recruiterUser,
         $employeeUser

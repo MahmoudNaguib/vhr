@@ -20,6 +20,12 @@
 
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="contact" class="nav-link <?php echo e((request()->is('/contact'))?'active':''); ?>">
+                        <?php echo e(trans('app.Contact us')); ?>
+
+                    </a>
+                </li>
                 <?php if(auth()->guest()): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle <?php echo e((request()->is('auth/*'))?'active':''); ?>" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -40,12 +46,14 @@
 
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="dashboard">
-                                    <?php echo e(trans('app.Dashboard')); ?>
+                            <?php if(auth()->user()->type!='admin'): ?>
+                                <li>
+                                    <a class="dropdown-item" href="dashboard">
+                                        <?php echo e(trans('app.Dashboard')); ?>
 
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                             <li>
                                 <a class="dropdown-item" href="profile/edit">
                                     <?php echo e(trans('app.Edit account')); ?>

@@ -18,6 +18,11 @@
                         {{trans('app.About')}}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="contact" class="nav-link {{(request()->is('/contact'))?'active':''}}">
+                        {{trans('app.Contact us')}}
+                    </a>
+                </li>
                 @if(auth()->guest())
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {{(request()->is('auth/*'))?'active':''}}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -36,11 +41,13 @@
                             {{trans('app.Welcome')}} {{auth()->user()->name}}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="dashboard">
-                                    {{trans('app.Dashboard')}}
-                                </a>
-                            </li>
+                            @if(auth()->user()->type!='admin')
+                                <li>
+                                    <a class="dropdown-item" href="dashboard">
+                                        {{trans('app.Dashboard')}}
+                                    </a>
+                                </li>
+                            @endif
                             <li>
                                 <a class="dropdown-item" href="profile/edit">
                                     {{trans('app.Edit account')}}

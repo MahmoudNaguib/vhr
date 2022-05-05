@@ -18,8 +18,8 @@ class PlansSeeder extends Seeder {
             \DB::table('plans')->delete();
             if (app()->environment() != 'testing') {
                 \DB::statement("ALTER TABLE plans AUTO_INCREMENT = 1");
-                insertDefaultPlans();
             }
+            insertDefaultPlans();
         }
     }
 }

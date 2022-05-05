@@ -66,7 +66,7 @@
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 <?php endif; ?>
-                                <?php if(can('edit-'.$module)): ?>
+                                <?php if(can('view-'.$module)): ?>
                                     <a class="btn btn-xs" href="admin/<?php echo e($module); ?>/view/<?php echo e($row->id); ?>" title="<?php echo e(trans('app.View')); ?>">
                                         <i class="fa fa-eye"></i>
                                     </a>

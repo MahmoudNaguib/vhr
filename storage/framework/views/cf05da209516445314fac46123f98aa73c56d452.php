@@ -18,9 +18,11 @@
                 <br>
             <?php endif; ?>
             <?php
-                $value=(@$attributes['value'])?:$row->$name;
+                $value=(@$attributes['value'])?:@$row->$name;
             ?>
             <span class="preview">
+                <?php echo e($value); ?>
+
                  <?php if(@$attributes['file_type'] == 'attachment'): ?>
                     <?php echo fileRender($value); ?>
 

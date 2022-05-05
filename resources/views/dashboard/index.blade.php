@@ -3,5 +3,7 @@
     <h2>{{$page_title}}</h2>
 @endsection
 @section('content')
-    @include('dashboard.'.auth()->user()->type)
+    @if(auth()->user()->type!='admin')
+        @include('dashboard.'.auth()->user()->type)
+    @endif
 @endsection

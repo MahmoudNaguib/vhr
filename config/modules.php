@@ -12,6 +12,16 @@ return [
         'view-industries' => 'View industries',
         'delete-industries' => 'Delete industries',
     ],
+    'Plans' => [
+        'create-plans' => 'Create plans',
+        'edit-plans' => 'Edit plans',
+        'view-plans' => 'View plans',
+        'delete-plans' => 'Delete plans',
+    ],
+    'Contact messages' => [
+        'view-messages' => 'View messages',
+        'delete-messages' => 'Delete messages',
+    ],
     'Users' => [
         'create-users' => 'Create users',
         'edit-users' => 'Edit users',

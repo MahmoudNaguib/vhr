@@ -14,8 +14,12 @@
         <div class="container mb-2">
             @include('partials.inner-navigation')
         </div>
-        @yield('title')
-        @yield('content')
+        <div class="text-center">
+            @yield('title')
+        </div>
+        <div class="main_container">
+            @yield('content')
+        </div>
     </div>
 </div>
 

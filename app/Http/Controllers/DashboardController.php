@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 
 class DashboardController extends \App\Http\Controllers\Controller {
 
-    public function __construct(\App\Models\User $model) {
+    public function __construct() {
         $this->module = 'dashboard';
-        $this->model = $model;
     }
 
     public function getIndex() {

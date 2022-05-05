@@ -31,6 +31,12 @@ class UsersController extends \App\Http\Controllers\Controller {
 
     public function postCreate() {
         authorize('create-' . $this->module);
+        if(request('type')=='admin'){
+            $this->adminCreate['role_id']='required';
+        }
+        if(request('type')=='recruiter'){
+            $this->adminCreate['company_id']='required';
+        }
         $this->validate(request(), $this->adminCreate);
         if ($row = $this->model->create(request()->except(['parents']))) {
             flash()->success(trans('app.Created successfully'));
@@ -53,6 +59,12 @@ class UsersController extends \App\Http\Controllers\Controller {
         $row = $this->model->findOrFail($id);
         $this->adminEdit['email'] .= ',' . $id . ',id,deleted_at,NULL';
         $this->adminEdit['mobile'] .= ',' . $id . ',id,deleted_at,NULL';
+        if(request('type')=='admin'){
+            $this->adminEdit['role_id']='required';
+        }
+        if(request('type')=='recruiter'){
+            $this->adminEdit['company_id']='required';
+        }
         $this->validate(request(), $this->adminEdit);
         if ($row->update(request()->all())) {
             flash(trans('app.Update successfully'))->success();

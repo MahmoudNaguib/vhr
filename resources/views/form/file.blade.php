@@ -15,9 +15,10 @@
                 <br>
             @endif
             @php
-                $value=(@$attributes['value'])?:$row->$name;
+                $value=(@$attributes['value'])?:@$row->$name;
             @endphp
             <span class="preview">
+                {{$value}}
                  @if(@$attributes['file_type'] == 'attachment')
                     {!! fileRender($value) !!}
                  @else

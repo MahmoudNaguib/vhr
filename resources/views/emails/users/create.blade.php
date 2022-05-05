@@ -26,7 +26,7 @@
 
     @if($row->mobile)
         <p>
-            <strong>{{trans("email.Mobile")}} : </strong> {{$row->mobile_number}}
+            <strong>{{trans("email.Mobile")}} : </strong> {{$row->mobile}}
         </p>
     @endif
 

@@ -14,8 +14,12 @@
         <div class="container mb-2">
             <?php echo $__env->make('partials.inner-navigation', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         </div>
-        <?php echo $__env->yieldContent('title'); ?>
-        <?php echo $__env->yieldContent('content'); ?>
+        <div class="text-center">
+            <?php echo $__env->yieldContent('title'); ?>
+        </div>
+        <div class="main_container">
+            <?php echo $__env->yieldContent('content'); ?>
+        </div>
     </div>
 </div>
 

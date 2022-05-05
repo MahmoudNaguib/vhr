@@ -13,13 +13,14 @@ class Plan extends BaseModel {
     protected $hidden = [
         'deleted_at',
     ];
-    public $edit = [
+    public $rules = [
         'title' => 'required',
         'applicants_unlock_count' => 'required|integer',
         'posts_count' => 'required|integer',
         'duration_in_month' => 'required|integer',
         'price' => 'required|numeric',
     ];
+
     public function toSearchableArray() {
         $array = [
             'title' => $this->title,
@@ -51,7 +52,7 @@ class Plan extends BaseModel {
                     'Applicants unlock count' => @$row->applicants_unlock_count,
                     'Posts count' => @$row->posts_count,
                     'Duration in month' => @$row->duration_in_month,
-                    'price' => @$row->price,
+                    'Price' => @$row->price,
                     'Created at' => @$row->created_at,
                 ];
             });

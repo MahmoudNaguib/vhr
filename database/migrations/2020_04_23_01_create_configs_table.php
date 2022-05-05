@@ -14,7 +14,7 @@ class CreateConfigsTable extends Migration {
         Schema::create('configs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('field')->nullable();
-            $table->string('value')->nullable();
+            $table->mediumText('value')->nullable();
             $table->bigInteger('created_by')->nullable()->index();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));

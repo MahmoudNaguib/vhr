@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/about', [\App\Http\Controllers\AboutController::class, 'index']);
+AdvancedRoute::controller('contact', \App\Http\Controllers\MessageController::class);
+
 AdvancedRoute::controller('auth', \App\Http\Controllers\AuthController::class);
 AdvancedRoute::controller('download', \App\Http\Controllers\DownloadController::class);
 
@@ -22,11 +25,15 @@ Route::group(['middleware' => ['auth']], function () {
     ////////////// Admin Routes
     Route::group(['prefix' => 'admin','middleware' => ['IsSuperAdmin']], function () {
         AdvancedRoute::controller('roles', \App\Http\Controllers\Admin\RolesController::class);
+        AdvancedRoute::controller('configs', \App\Http\Controllers\Admin\ConfigsController::class);
     });
     Route::group(['prefix' => 'admin','middleware' => ['IsAdmin']], function () {
+        AdvancedRoute::controller('dashboard', \App\Http\Controllers\Admin\DashboardController::class);
         AdvancedRoute::controller('users', \App\Http\Controllers\Admin\UsersController::class);
         AdvancedRoute::controller('countries', \App\Http\Controllers\Admin\CountriesController::class);
+        AdvancedRoute::controller('plans', \App\Http\Controllers\Admin\PlansController::class);
         AdvancedRoute::controller('industries', \App\Http\Controllers\Admin\IndustriesController::class);
+        AdvancedRoute::controller('messages', \App\Http\Controllers\Admin\MessagesController::class);
         AdvancedRoute::controller('companies', \App\Http\Controllers\Admin\CompaniesController::class);
     });
     ////////////// End Admin Routes
