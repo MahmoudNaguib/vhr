@@ -14,6 +14,12 @@
 
     <?php if($row->name): ?>
         <p>
+            <strong><?php echo e(trans("email.Type")); ?> : </strong> <?php echo e($row->type); ?>
+
+        </p>
+    <?php endif; ?>
+    <?php if($row->name): ?>
+        <p>
             <strong><?php echo e(trans("email.Name")); ?> : </strong> <?php echo e($row->name); ?>
 
         </p>
@@ -28,7 +34,7 @@
 
     <?php if($row->mobile): ?>
         <p>
-            <strong><?php echo e(trans("email.Mobile")); ?> : </strong> <?php echo e($row->mobile_number); ?>
+            <strong><?php echo e(trans("email.Mobile")); ?> : </strong> <?php echo e($row->mobile); ?>
 
         </p>
     <?php endif; ?>

@@ -38,6 +38,12 @@ class User extends Authenticatable {
             'sizes' => ['large' => 'resize,300x300', 'small' => 'crop,150x150'],
         ],
     ];
+    public $editAdmin = [
+        'gender' => 'required|in:m,f',
+        'name' => 'required|min:4',
+        'mobile' => 'required|mobile',
+        'image' => 'nullable|image|max:4000'
+    ];
     public $editRecruiter = [
         'gender' => 'required|in:m,f',
         'name' => 'required|min:4',

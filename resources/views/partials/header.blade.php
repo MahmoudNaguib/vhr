@@ -53,12 +53,12 @@
                                     {{trans('app.Edit account')}}
                                 </a>
                             </li>
-                            @if(auth()->user()->type=='recruiter')
-                            <li>
-                                <a class="dropdown-item" href="company/edit">
-                                    {{trans('app.Edit company profile')}}
-                                </a>
-                            </li>
+                            @if(auth()->user()->type=='recruiter' && auth()->user()->is_company_admin==1)
+                                <li>
+                                    <a class="dropdown-item" href="company/edit">
+                                        {{trans('app.Edit company profile')}}
+                                    </a>
+                                </li>
                             @endif
                             <li>
                                 <a class="dropdown-item" href="profile/change-password">

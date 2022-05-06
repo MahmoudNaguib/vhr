@@ -21,4 +21,5 @@ return [
     'Confirm' => 'Confirm',
     'Forgot password' => 'Forgot password',
     'Click the below link to reset password' => 'Click the below link to reset password',
+    'Type' => 'Type',
 ];

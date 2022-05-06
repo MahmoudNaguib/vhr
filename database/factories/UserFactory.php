@@ -22,11 +22,12 @@ class UserFactory extends Factory {
     public function definition() {
         $email=$this->faker->unique()->safeEmail;
         return [
-            'gender' => 'm',
+            'gender'=>'m',
             'name' => $this->faker->name,
             'email' => $email,
             'mobile' => '0122' . rand(1000000, 9999999),
-            'token'=>generateToken($email)
+            'token'=>generateToken($email),
+            'confirmed'=>1
         ];
     }
 }

@@ -4,13 +4,23 @@
 @endsection
 @section('content')
     @if (!$rows->isEmpty())
-        <div class="float-end">
-            <b>{{ trans('app.Total')}}</b>: {{$rows->total()}} {{trans('app.records')}}
+        <div>
+            <div class="float-end">
+                <b>{{ trans('app.Total')}}</b>: {{$rows->total()}} {{trans('app.records')}}
+            </div>
+            <div class="float-start">
+                <button class="btn btn-danger delete_all btn-sm mb-2"
+                        href="{{$module}}/delete-all"
+                        data-confirm="{{trans('app.Are you sure you want to delete the selected')}}?">
+                    {{trans('app.Delete selected')}}
+                </button>
+            </div>
         </div>
         <div class="grid-responsive">
             <table class="table table-striped">
                 <thead>
                 <tr>
+                    <th class="ml-1"><input type="checkbox" id="master"></th>
                     <th class="ml-1">{{trans('app.ID')}} </th>
                     <th class="ml-2">{{trans('app.Title')}} </th>
                     <th class="ml-2">{{trans('app.Seen at')}} </th>
@@ -21,6 +31,9 @@
                 <tbody>
                 @foreach ($rows as $row)
                     <tr>
+                        <td>
+                            <input type="checkbox" class="sub_chk" data-id="{{$row->id}}">
+                        </td>
                         <td data-label="#">{{$row->id}}</td>
                         <td data-label="{{trans('app.Title')}}">
                             {{$row->title}}

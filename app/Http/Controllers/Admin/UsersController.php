@@ -38,6 +38,11 @@ class UsersController extends \App\Http\Controllers\Controller {
             $this->adminCreate['company_id']='required';
         }
         $this->validate(request(), $this->adminCreate);
+        request()->request->add([
+            'confirmed' =>1,
+            'token' =>  generateToken(request('email')),
+            'completed_profile'=>1
+        ]);
         if ($row = $this->model->create(request()->except(['parents']))) {
             flash()->success(trans('app.Created successfully'));
             return redirect('admin/' . $this->module);
@@ -89,7 +94,7 @@ class UsersController extends \App\Http\Controllers\Controller {
                 $row->delete();
             }
         }
-        flash()->success(trans('admin.Deleted successfully'));
+        flash()->success(trans('app.Deleted successfully'));
         return back();
     }
 

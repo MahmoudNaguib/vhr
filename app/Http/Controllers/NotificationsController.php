@@ -32,9 +32,20 @@ class NotificationsController extends \App\Http\Controllers\Controller {
 
     public function getDelete($id) {
         $row = $this->model->own()->findOrFail($id);
-        if($row->delete()){
+        if ($row->delete()) {
             flash()->success(trans('app.Deleted Successfully'));
             return back();
         }
+    }
+
+    public function getDeleteAll() {
+        $rows = $this->model->whereIn('id', explode(',', request('ids')))->get();
+        if ($rows) {
+            foreach ($rows as $row) {
+                $row->delete();
+            }
+        }
+        flash()->success(trans('app.Deleted successfully'));
+        return back();
     }
 }

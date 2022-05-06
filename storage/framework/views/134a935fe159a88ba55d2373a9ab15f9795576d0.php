@@ -3,14 +3,25 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <?php if(!$rows->isEmpty()): ?>
-        <div class="float-end">
-            <b><?php echo e(trans('app.Total')); ?></b>: <?php echo e($rows->total()); ?> <?php echo e(trans('app.records')); ?>
+        <div>
+            <div class="float-end">
+                <b><?php echo e(trans('app.Total')); ?></b>: <?php echo e($rows->total()); ?> <?php echo e(trans('app.records')); ?>
 
+            </div>
+            <div class="float-start">
+                <button class="btn btn-danger delete_all btn-sm mb-2"
+                        href="<?php echo e($module); ?>/delete-all"
+                        data-confirm="<?php echo e(trans('app.Are you sure you want to delete the selected')); ?>?">
+                    <?php echo e(trans('app.Delete selected')); ?>
+
+                </button>
+            </div>
         </div>
         <div class="grid-responsive">
             <table class="table table-striped">
                 <thead>
                 <tr>
+                    <th class="ml-1"><input type="checkbox" id="master"></th>
                     <th class="ml-1"><?php echo e(trans('app.ID')); ?> </th>
                     <th class="ml-2"><?php echo e(trans('app.Title')); ?> </th>
                     <th class="ml-2"><?php echo e(trans('app.Seen at')); ?> </th>
@@ -21,6 +32,9 @@
                 <tbody>
                 <?php $__currentLoopData = $rows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
+                        <td>
+                            <input type="checkbox" class="sub_chk" data-id="<?php echo e($row->id); ?>">
+                        </td>
                         <td data-label="#"><?php echo e($row->id); ?></td>
                         <td data-label="<?php echo e(trans('app.Title')); ?>">
                             <?php echo e($row->title); ?>
@@ -51,7 +65,7 @@
 
         </div>
     <?php else: ?>
-        <?php echo e(locale("app.There is no results")); ?>
+        <?php echo e(trans("app.There is no results")); ?>
 
     <?php endif; ?>
 <?php $__env->stopSection(); ?>

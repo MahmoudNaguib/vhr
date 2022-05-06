@@ -9,22 +9,29 @@ class ProfileController extends \App\Http\Controllers\Controller {
         $this->module = 'profile';
         $this->title = trans('app.Profile');
         $this->model = $model;
+        $this->editAdmin = $model->editAdmin;
         $this->editRecruiter = $model->editRecruiter;
         $this->editEmployee = $model->editEmployee;
         $this->changePassword = $model->changePassword;
     }
 
     public function getEdit() {
-        $data['page_title'] = $this->title.' - '.trans('app.Edit');
+        $data['page_title'] = $this->title . ' - ' . trans('app.Edit');
         $data['row'] = $this->model->findOrFail(auth()->user()->id);
         return view($this->module . '.edit', $data);
     }
 
     public function postEdit() {
         $row = $this->model->findOrFail(auth()->user()->id);
-        $this->validate(request(), ($row->type == 'recruiter') ? $this->editRecruiter : $this->editEmployee);
+        if (auth()->user()->type == 'admin')
+            $rules = $this->editAdmin;
+        elseif (auth()->user()->type == 'employee')
+            $rules = $this->editEmployee;
+        elseif (auth()->user()->type == 'recruiter')
+            $rules = $this->editRecruiter;
+        $this->validate(request(), $rules);
         if ($row->update(request()->all())) {
-            if($row->type=='employee') {
+            if ($row->type == 'employee') {
                 $row->completed_profile = 1;
                 $row->save();
             }
@@ -36,7 +43,7 @@ class ProfileController extends \App\Http\Controllers\Controller {
     }
 
     public function getChangePassword() {
-        $data['page_title'] = $this->title.' - '.trans('app.Change password');
+        $data['page_title'] = $this->title . ' - ' . trans('app.Change password');
         $data['row'] = $this->model->findOrFail(auth()->user()->id);
         return view($this->module . '.change-password', $data);
     }
@@ -59,6 +66,7 @@ class ProfileController extends \App\Http\Controllers\Controller {
     public function getLogout() {
         auth()->logout();
         session()->flush();
+        flash(trans('app.Log out successfully'))->success();
         return redirect('auth/login');
     }
 }

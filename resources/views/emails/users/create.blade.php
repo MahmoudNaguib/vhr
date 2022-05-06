@@ -14,6 +14,11 @@
 
     @if($row->name)
         <p>
+            <strong>{{trans("email.Type")}} : </strong> {{$row->type}}
+        </p>
+    @endif
+    @if($row->name)
+        <p>
             <strong>{{trans("email.Name")}} : </strong> {{$row->name}}
         </p>
     @endif

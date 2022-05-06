@@ -23,8 +23,8 @@ class RoleFactory extends Factory {
         $permissions=config('modules.Users');
         return [
             'title' => $this->faker->sentence(2),
-            'permissions'=>$permissions,
-            'created_by' => creator()->id
+            'permissions'=>array_keys($permissions),
+            'created_by' =>1
         ];
     }
 }

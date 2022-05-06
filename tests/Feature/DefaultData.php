@@ -10,6 +10,8 @@ trait DefaultData {
     public function setup(): void {
         parent::setup();
         $this->seed(DatabaseSeeder::class);
+        $this->adminURL='admin';
+        $this->apiURL='api';
         $this->adminUser = \App\Models\User::find(1);
         $this->recruiterUser = \App\Models\User::where('type', '=', 'recruiter')->first();
         $this->employeeUser = \App\Models\User::where('type', '=', 'employee')->first();

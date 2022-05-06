@@ -60,13 +60,13 @@
 
                                 </a>
                             </li>
-                            <?php if(auth()->user()->type=='recruiter'): ?>
-                            <li>
-                                <a class="dropdown-item" href="company/edit">
-                                    <?php echo e(trans('app.Edit company profile')); ?>
+                            <?php if(auth()->user()->type=='recruiter' && auth()->user()->is_company_admin==1): ?>
+                                <li>
+                                    <a class="dropdown-item" href="company/edit">
+                                        <?php echo e(trans('app.Edit company profile')); ?>
 
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
                             <?php endif; ?>
                             <li>
                                 <a class="dropdown-item" href="profile/change-password">

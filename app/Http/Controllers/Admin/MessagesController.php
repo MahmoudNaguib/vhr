@@ -35,7 +35,7 @@ class MessagesController extends \App\Http\Controllers\Controller {
                 $row->delete();
             }
         }
-        flash()->success(trans('admin.Deleted successfully'));
+        flash()->success(trans('app.Deleted successfully'));
         return back();
     }
 

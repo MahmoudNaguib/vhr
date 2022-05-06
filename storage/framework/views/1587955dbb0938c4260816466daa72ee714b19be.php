@@ -28,7 +28,7 @@
 
     <?php if($row->message): ?>
         <p>
-            <strong><?php echo e(trans("email.message")); ?> : </strong> <?php echo e($row->message); ?>
+            <strong><?php echo e(trans("email.Message")); ?> : </strong> <?php echo e($row->message); ?>
 
         </p>
     <?php endif; ?>

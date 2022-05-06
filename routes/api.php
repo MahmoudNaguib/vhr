@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 AdvancedRoute::controller('auth', \App\Http\Controllers\Api\AuthController::class);
+AdvancedRoute::controller('configs', \App\Http\Controllers\Api\ConfigsController::class);
+AdvancedRoute::controller('messages', \App\Http\Controllers\Api\MessagesController::class);
 Route::group(['middleware' => ['auth']], function () {
     AdvancedRoute::controller('profile', \App\Http\Controllers\Api\ProfileController::class);
 });
