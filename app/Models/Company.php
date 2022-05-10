@@ -22,6 +22,18 @@ class Company extends BaseModel {
         'address' => 'required',
         'commercial_registry' => 'required|max:4000',
         'tax_id_card' => 'required|max:4000',
+        'plan_id' => 'required',
+        'expiry_date'=>'required|date',
+        'image' => 'nullable|image|max:4000',
+    ];
+    public $editRules = [
+        'title' => 'required',
+        'industry_id' => 'required',
+        'country_id' => 'required',
+        'city' => 'required',
+        'address' => 'required',
+        'commercial_registry' => 'required|max:4000',
+        'tax_id_card' => 'required|max:4000',
         'image' => 'nullable|image|max:4000',
     ];
     static $attachFields = [
@@ -43,6 +55,10 @@ class Company extends BaseModel {
         return $array;
     }
 
+    public function plan() {
+        return $this->belongsTo(Plan::class, 'plan_id')->withTrashed()->withDefault();
+    }
+
     public function industry() {
         return $this->belongsTo(Industry::class, 'industry_id')->withTrashed()->withDefault();
     }
@@ -52,11 +68,14 @@ class Company extends BaseModel {
     }
 
     public function includes() {
-        return $this->with(['industry', 'country']);
+        return $this->with(['plan','industry', 'country']);
     }
 
     public function scopeFilterAndSort() {
         return $this->includes()
+            ->when(request('plan_id'), function ($q) {
+                return $q->where('plan_id', request('plan_id'));
+            })
             ->when(request('industry_id'), function ($q) {
                 return $q->where('industry_id', request('industry_id'));
             })
@@ -77,6 +96,7 @@ class Company extends BaseModel {
             ->download($fileName . "_" . date("Y-m-d H:i:s") . '.xlsx', function ($row) {
                 return [
                     'ID' => $row->id,
+                    'Plan' => @$row->plan->title,
                     'Title' => $row->title,
                     'Industry' => @$row->industry->title,
                     'Country' => @$row->country->title,

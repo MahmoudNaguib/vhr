@@ -35,6 +35,8 @@ class CompanyFactory extends Factory {
             'facebook' => 'https://facebook.com/'.RandomString(10),
             'instagram' => 'https://instagram.com/'.RandomString(10),
             'image' => RandomString(10) . time().'.png',
+            'plan_id'=>1,
+            'expiry_date'=>date('Y-m-d', strtotime(date('Y-m-d') . ' +1 year'))
         ];
     }
 }

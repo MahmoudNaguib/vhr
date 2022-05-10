@@ -4,6 +4,18 @@
     <label class="section-title"><?php echo e(trans('app.Filter by')); ?></label>
     <div class="row">
         <div class="col-lg-4 col-md-6 mt-2">
+            <?php echo Form::select('country_id', $row->getCountries(),@request('country_id'), ['class'=>'form-control','placeholder'=>trans('app.Country')]); ?>
+
+        </div>
+        <div class="col-lg-4 col-md-6 mt-2">
+            <?php echo Form::select('industry_id', $row->getIndustries(),@request('industry_id'), ['class'=>'form-control','placeholder'=>trans('app.Industry')]); ?>
+
+        </div>
+        <div class="col-lg-4 col-md-6 mt-2">
+            <?php echo Form::select('plan_id', $row->getPlans(),@request('plan_id'), ['class'=>'form-control','placeholder'=>trans('app.Plan')]); ?>
+
+        </div>
+        <div class="col-lg-4 col-md-6 mt-2">
             <?php echo Form::text('title',@request('title'),['class'=>'form-control','placeholder'=>trans('app.Title')]); ?>
 
         </div>

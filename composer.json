@@ -19,6 +19,7 @@
         "laravelcollective/html": "^6.3",
         "lesichkovm/laravel-advanced-route": "^1.9",
         "mahmoudnaguib/laravel-langman": "^1.0",
+        "mcamara/laravel-localization": "^1.7",
         "rap2hpoutre/fast-excel": "^3.2",
         "yab/laravel-scout-mysql-driver": "^5.1"
     },

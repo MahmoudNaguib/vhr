@@ -54,12 +54,12 @@ class User extends Authenticatable {
         'gender' => 'required|in:m,f',
         'name' => 'required|min:4',
         'mobile' => 'required|mobile',
-        'country_id'=>'required',
-        'city'=>'required',
-        'national_id'=>'required',
-        'birth_date'=>'required|date|before_or_equal:2010-01-01',
-        'degree'=>'required',
-        'bio'=>'required',
+        'country_id' => 'required',
+        'city' => 'required',
+        'national_id' => 'required',
+        'birth_date' => 'required|date|before_or_equal:2010-01-01',
+        'degree' => 'required',
+        'bio' => 'required',
         'image' => 'nullable|image|max:4000'
     ];
     public $rules = [
@@ -83,6 +83,19 @@ class User extends Authenticatable {
         'mobile' => 'required|mobile|unique:users,mobile',
         'password' => 'nullable|confirmed|min:8',
     ];
+
+    public $recruiterCreate = [
+        'name' => 'required|min:4',
+        'email' => 'required|email|unique:users,email',
+        'mobile' => 'required|mobile|unique:users,mobile',
+        'password' => 'required|confirmed|min:8',
+    ];
+    public $recruiterEdit = [
+        'name' => 'required|min:4',
+        'email' => 'required|email|unique:users,email',
+        'mobile' => 'required|mobile|unique:users,mobile',
+        'password' => 'nullable|confirmed|min:8',
+    ];
     public $loginRules = [
         'email' => 'required|email',
         'password' => 'required|min:8',
@@ -101,6 +114,7 @@ class User extends Authenticatable {
     public $changeImageRules = [
         'image' => 'required|image|max:4000'
     ];
+
     public function toSearchableArray() {
         $array = [
             'name' => $this->name,
@@ -109,6 +123,7 @@ class User extends Authenticatable {
         ];
         return $array;
     }
+
     public static function boot() {
         parent::boot();
         static::created(function ($row) {

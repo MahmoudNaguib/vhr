@@ -22,7 +22,8 @@ class PlanFactory extends Factory {
     public function definition() {
         return [
             'title' => $this->faker->sentence(2),
-            'applicants_unlock_count' => rand(10,100),
+            'users_count'=>rand(1,10),
+            'unlock_count' => rand(10,100),
             'posts_count'=>rand(5,100),
             'duration_in_month'=>1,
             'price'=>rand(10,100)

@@ -1,5 +1,9 @@
 @include('form.input',['name'=>'title','type'=>'text','attributes'=>['class'=>'form-control','label'=>trans('app.Title'),'placeholder'=>trans('app.Title'),'autocomplete'=>"off",'required'=>1]])
 
+@include('form.select',['name'=>'plan_id','options'=>$row->getPlans(),'attributes'=>['class'=>'form-control','label'=>trans('app.Plan'),'placeholder'=>trans('app.Plan'),'required'=>1]])
+
+@include('form.input',['name'=>'expiry_date','type'=>'text','attributes'=>['class'=>'form-control datepicker','label'=>trans('app.Expiry date'),'placeholder'=>trans('app.Expiry date'),'autocomplete'=>"off",'required'=>1]])
+
 @include('form.select',['name'=>'industry_id','options'=>$row->getIndustries(),'attributes'=>['class'=>'form-control','label'=>trans('app.Industry'),'placeholder'=>trans('app.Industry'),'required'=>1]])
 
 @include('form.select',['name'=>'country_id','options'=>$row->getCountries(),'attributes'=>['class'=>'form-control','label'=>trans('app.Country'),'placeholder'=>trans('app.Country'),'required'=>1]])

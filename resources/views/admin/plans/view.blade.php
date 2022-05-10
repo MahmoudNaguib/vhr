@@ -10,8 +10,12 @@
                 <td>{{$row->title}}</td>
             </tr>
             <tr>
-                <td>{{trans('app.Applicants unlock count')}}</td>
-                <td>{{$row->applicants_unlock_count}}</td>
+                <td>{{trans('app.Users count')}}</td>
+                <td>{{$row->users_count}}</td>
+            </tr>
+            <tr>
+                <td>{{trans('app.Unlock count')}}</td>
+                <td>{{$row->unlock_count}}</td>
             </tr>
             <tr>
                 <td>{{trans('app.Posts count')}}</td>

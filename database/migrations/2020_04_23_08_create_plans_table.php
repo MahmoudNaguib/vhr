@@ -15,7 +15,8 @@ class CreatePlansTable extends Migration {
         Schema::create('plans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->tinyText('title')->nullable();
-            $table->integer('applicants_unlock_count')->nullable()->default(0);
+            $table->integer('users_count')->nullable()->default(0);
+            $table->integer('unlock_count')->nullable()->default(0);
             $table->integer('posts_count')->nullable()->default(0);
             $table->integer('duration_in_month')->nullable()->default(0);
             $table->float('price', 11, 2)->nullable()->default(0)->index();

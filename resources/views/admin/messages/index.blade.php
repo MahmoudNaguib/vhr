@@ -3,7 +3,7 @@
     <h2>
         {{$page_title}}
         @if(can('view-'.$module))
-            <a href="/admin/{{$module}}/export?{{@$_SERVER['QUERY_STRING']}}" class="btn btn-secondary">
+            <a href="admin/{{$module}}/export?{{@$_SERVER['QUERY_STRING']}}" class="btn btn-secondary">
                 <i class="fa fa-download"></i> {{trans('app.Export')}}
             </a>
         @endif

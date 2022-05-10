@@ -10,7 +10,7 @@ trait DefaultData {
     public function setup(): void {
         parent::setup();
         $this->seed(DatabaseSeeder::class);
-        $this->adminURL='admin';
+        $this->adminURL='en/admin';
         $this->apiURL='api';
         $this->adminUser = \App\Models\User::find(1);
         $this->recruiterUser = \App\Models\User::where('type', '=', 'recruiter')->first();
@@ -18,23 +18,23 @@ trait DefaultData {
     }
 
     public function actingAsAdmin() {
-        $this->actingAs($this->adminUser);
+        $this->actingAs($this->adminUser)->withSession(['locale' => 'en']);
     }
 
     public function actingAsRecruiterUser() {
-        $this->actingAs($this->recruiterUser);
+        $this->actingAs($this->recruiterUser)->withSession(['locale' => 'en']);
     }
 
     public function actingAsEmployeeUser() {
-        $this->actingAs($this->employeeUser);
+        $this->actingAs($this->employeeUser)->withSession(['locale' => 'en']);
     }
 
     public function actingAsRecruiterUserApi() {
-        $this->actingAs($this->recruiterUser)->withHeaders(['Authorization' => $this->recruiterUser->token]);
+        $this->actingAs($this->recruiterUser)->withHeaders(['Authorization' => $this->recruiterUser->token,'locale' => 'en']);
     }
 
     public function actingAsEmployeeUserApi() {
-        $this->actingAs($this->employeeUser)->withHeaders(['Authorization' => $this->employeeUser->token]);
+        $this->actingAs($this->employeeUser)->withHeaders(['Authorization' => $this->employeeUser->token,'locale' => 'en']);
     }
 
 }

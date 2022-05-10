@@ -13,10 +13,13 @@ class CreateUsersTable extends Migration {
     public function up() {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->enum('type', ['admin','recruiter','employee'])->nullable()->index();
+            /////// Admin
             $table->bigInteger('role_id')->nullable()->index();
+            /////////////////// recruiter
             $table->bigInteger('company_id')->nullable()->index();
             $table->boolean('is_company_admin')->nullable()->default(0)->index();
-            $table->enum('type', ['admin','recruiter','employee'])->nullable()->index();
+            /////////////////
             $table->string('name')->nullable();
             $table->string('email')->nullable()->unique();
             $table->string('mobile')->nullable();
@@ -38,6 +41,7 @@ class CreateUsersTable extends Migration {
             $table->string('password_token')->nullable();
             $table->boolean('confirmed')->nullable()->default(0)->index();
             $table->boolean('is_active')->nullable()->default(1)->index();
+            $table->boolean('is_verified')->nullable()->default(0)->index();
             $table->timestamp('last_logged_in_at')->nullable();
             $table->string('last_ip')->nullable();
             $table->boolean('completed_profile')->nullable()->default(0)->index();

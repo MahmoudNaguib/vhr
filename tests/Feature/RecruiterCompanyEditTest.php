@@ -13,7 +13,7 @@ class RecruiterCompanyEditTest extends TestCase {
     public function test_get_edit() {
         dump(get_class($this) . ' ' . __FUNCTION__);
         $this->actingAsRecruiterUser();
-        $this->get('/company/edit')
+        $this->get('en/company/edit')
             ->assertStatus(200);
     }
 
@@ -21,7 +21,7 @@ class RecruiterCompanyEditTest extends TestCase {
         dump(get_class($this) . ' ' . __FUNCTION__);
         $this->actingAsRecruiterUser();
         $factory = \App\Models\Company::factory()->make();
-        $this->post( '/company/edit', $factory->toArray())
+        $this->post( 'en/company/edit', $factory->toArray())
             ->assertStatus(302);
     }
 }

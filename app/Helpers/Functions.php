@@ -250,3 +250,11 @@ function fileRender($file) {
         <a href="download/file/' . $file . '" >' . $file . '</a>';
 }
 
+function lang() {
+    return \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale();
+}
+
+function langs() {
+    $languages = (array_keys(config('laravellocalization.supportedLocales'))) ?: [];
+    return $languages;
+}

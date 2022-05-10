@@ -9,6 +9,10 @@
                 <td><?php echo e($row->title); ?></td>
             </tr>
             <tr>
+                <td><?php echo e(trans('app.Plan')); ?></td>
+                <td><?php echo e($row->plan->title); ?></td>
+            </tr>
+            <tr>
                 <td><?php echo e(trans('app.Industry')); ?></td>
                 <td><?php echo e($row->industry->title); ?></td>
             </tr>

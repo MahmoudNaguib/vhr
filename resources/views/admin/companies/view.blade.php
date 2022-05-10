@@ -10,6 +10,10 @@
                 <td>{{$row->title}}</td>
             </tr>
             <tr>
+                <td>{{trans('app.Plan')}}</td>
+                <td>{{$row->plan->title}}</td>
+            </tr>
+            <tr>
                 <td>{{trans('app.Industry')}}</td>
                 <td>{{$row->industry->title}}</td>
             </tr>

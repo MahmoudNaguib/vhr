@@ -3,7 +3,7 @@
         <?php echo e($page_title); ?>
 
         <?php if(can('view-'.$module)): ?>
-            <a href="/admin/<?php echo e($module); ?>/export?<?php echo e(@$_SERVER['QUERY_STRING']); ?>" class="btn btn-secondary">
+            <a href="admin/<?php echo e($module); ?>/export?<?php echo e(@$_SERVER['QUERY_STRING']); ?>" class="btn btn-secondary">
                 <i class="fa fa-download"></i> <?php echo e(trans('app.Export')); ?>
 
             </a>

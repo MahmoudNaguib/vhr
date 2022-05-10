@@ -13,7 +13,7 @@ class NotificationsWithTypeRecruiterTest extends TestCase {
     public function test_get_index() {
         dump(get_class($this) . ' ' . __FUNCTION__);
         $this->actingAsRecruiterUser();
-        $this->get('/notifications')
+        $this->get('en/notifications')
             ->assertStatus(200);
     }
 
@@ -21,7 +21,7 @@ class NotificationsWithTypeRecruiterTest extends TestCase {
         dump(get_class($this) . ' ' . __FUNCTION__);
         $this->actingAsRecruiterUser();
         $record = \App\Models\Notification::factory()->create(['user_id' => auth()->user()->id]);
-        $this->get('/notifications/view/' . $record->id)
+        $this->get('en/notifications/view/' . $record->id)
             ->assertStatus(200);
         $record->forceDelete();
     }
@@ -30,7 +30,7 @@ class NotificationsWithTypeRecruiterTest extends TestCase {
         dump(get_class($this) . ' ' . __FUNCTION__);
         $this->actingAsAdmin();
         $record = \App\Models\Notification::factory()->create(['user_id' => auth()->user()->id]);
-        $this->get('/notifications/delete/' . $record->id)
+        $this->get('en/notifications/delete/' . $record->id)
             ->assertStatus(302);
         $record->forceDelete();
     }
@@ -39,7 +39,7 @@ class NotificationsWithTypeRecruiterTest extends TestCase {
         dump(get_class($this) . ' ' . __FUNCTION__);
         $this->actingAsAdmin();
         $record = \App\Models\Notification::factory()->create(['user_id' => auth()->user()->id]);
-        $this->get('/notifications/delete-all?ids=' . $record->id)
+        $this->get('en/notifications/delete-all?ids=' . $record->id)
             ->assertStatus(302);
         $record->forceDelete();
     }

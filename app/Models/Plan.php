@@ -15,7 +15,8 @@ class Plan extends BaseModel {
     ];
     public $rules = [
         'title' => 'required',
-        'applicants_unlock_count' => 'required|integer',
+        'users_count' => 'required|integer',
+        'unlock_count' => 'required|integer',
         'posts_count' => 'required|integer',
         'duration_in_month' => 'required|integer',
         'price' => 'required|numeric',

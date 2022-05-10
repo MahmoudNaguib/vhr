@@ -9,8 +9,12 @@
                 <td><?php echo e($row->title); ?></td>
             </tr>
             <tr>
-                <td><?php echo e(trans('app.Applicants unlock count')); ?></td>
-                <td><?php echo e($row->applicants_unlock_count); ?></td>
+                <td><?php echo e(trans('app.Users count')); ?></td>
+                <td><?php echo e($row->users_count); ?></td>
+            </tr>
+            <tr>
+                <td><?php echo e(trans('app.Unlock count')); ?></td>
+                <td><?php echo e($row->unlock_count); ?></td>
             </tr>
             <tr>
                 <td><?php echo e(trans('app.Posts count')); ?></td>

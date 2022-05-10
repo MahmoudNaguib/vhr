@@ -3,12 +3,12 @@
     <h2>
         {{$page_title}}
         @if(can('create-'.$module))
-            <a href="/admin/{{$module}}/create" class="btn btn-success">
+            <a href="admin/{{$module}}/create" class="btn btn-success">
                 <i class="fa fa-plus"></i> {{trans('app.Create')}}
             </a>
         @endif
         @if(can('view-'.$module))
-            <a href="/admin/{{$module}}/export?{{@$_SERVER['QUERY_STRING']}}" class="btn btn-secondary">
+            <a href="admin/{{$module}}/export?{{@$_SERVER['QUERY_STRING']}}" class="btn btn-secondary">
                 <i class="fa fa-download"></i> {{trans('app.Export')}}
             </a>
         @endif
@@ -37,6 +37,8 @@
                         <th class="ml-1"><input type="checkbox" id="master"></th>
                         <th class="ml-1">{{trans('app.ID')}} </th>
                         <th class="ml-2">{{trans('app.Title')}} </th>
+                        <th class="ml-2">{{trans('app.Plan')}} </th>
+                        <th class="ml-2">{{trans('app.Expiry date')}} </th>
                         <th class="ml-2">{{trans('app.Industry')}} </th>
                         <th class="ml-2">{{trans('app.Country')}} </th>
                         <th class="ml-2">{{trans('app.Created at')}}</th>
@@ -52,6 +54,12 @@
                             <td data-label="#">{{$row->id}}</td>
                             <td data-label="{{trans('app.Title')}}">
                                 {{$row->title}}
+                            </td>
+                            <td data-label="{{trans('app.Plan')}}">
+                                {{$row->plan->title}}
+                            </td>
+                            <td data-label="{{trans('app.Expiry date')}}">
+                                {{$row->expiry_date}}
                             </td>
                             <td data-label="{{trans('app.Industry')}}">
                                 {{$row->industry->title}}
@@ -85,7 +93,11 @@
                 </table>
             </div>
             <div class="d-flex justify-content-center">
-                {!! $rows->appends(['title'=>request('title')])->links() !!}
+                {!! $rows->appends([
+            'country_id'=>request('country_id'),
+            'industry_id'=>request('industry_id'),
+            'plan_id'=>request('plan_id'),
+            'title'=>request('title')])->links() !!}
             </div>
         @else
             {{trans("app.There is no results")}}

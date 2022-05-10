@@ -57,7 +57,12 @@ class AdminUsersWithTypeRecruiterTest extends TestCase {
     public function test_view() {
         dump(get_class($this) . ' ' . __FUNCTION__);
         $this->actingAsAdmin();
-        $record = \App\Models\User::factory()->create(['type'=>'recruiter','company_id'=>1,'is_company_admin'=>1]);
+        $record = \App\Models\User::factory()->create([
+            'type'=>'recruiter',
+            'company_id'=>1,
+            'is_company_admin'=>1,
+            'is_verified'=>1
+        ]);
         $this->get($this->adminURL . '/users/view/' . $record->id)
             ->assertStatus(200);
         $record->forceDelete();

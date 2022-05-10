@@ -3,12 +3,12 @@
     <h2>
         {{$page_title}}
         @if(can('create-'.$module))
-            <a href="/admin/{{$module}}/create" class="btn btn-success">
+            <a href="admin/{{$module}}/create" class="btn btn-success">
                 <i class="fa fa-plus"></i> {{trans('app.Create')}}
             </a>
         @endif
         @if(can('view-'.$module))
-            <a href="/admin/{{$module}}/export?{{@$_SERVER['QUERY_STRING']}}" class="btn btn-secondary">
+            <a href="admin/{{$module}}/export?{{@$_SERVER['QUERY_STRING']}}" class="btn btn-secondary">
                 <i class="fa fa-download"></i> {{trans('app.Export')}}
             </a>
         @endif
@@ -37,7 +37,8 @@
                         <th class="ml-1"><input type="checkbox" id="master"></th>
                         <th class="ml-1">{{trans('app.ID')}} </th>
                         <th class="ml-2">{{trans('app.Title')}} </th>
-                        <th class="ml-2">{{trans('app.Applicants unlock count')}} </th>
+                        <th class="ml-2">{{trans('app.Users count')}} </th>
+                        <th class="ml-2">{{trans('app.Unlock count')}} </th>
                         <th class="ml-2">{{trans('app.Posts count')}} </th>
                         <th class="ml-2">{{trans('app.Duration in month')}} </th>
                         <th class="ml-2">{{trans('app.Price')}} </th>
@@ -55,8 +56,11 @@
                             <td data-label="{{trans('app.Title')}}">
                                 {{$row->title}}
                             </td>
-                            <td data-label="{{trans('app.Applicants unlock count')}}">
-                                {{$row->applicants_unlock_count}}
+                            <td data-label="{{trans('app.Users count')}}">
+                                {{$row->users_count}}
+                            </td>
+                            <td data-label="{{trans('app.Unlock count')}}">
+                                {{$row->unlock_count}}
                             </td>
                             <td data-label="{{trans('app.Posts count')}}">
                                 {{$row->posts_count}}

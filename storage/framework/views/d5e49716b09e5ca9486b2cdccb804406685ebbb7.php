@@ -3,13 +3,13 @@
         <?php echo e($page_title); ?>
 
         <?php if(can('create-'.$module)): ?>
-            <a href="/admin/<?php echo e($module); ?>/create" class="btn btn-success">
+            <a href="admin/<?php echo e($module); ?>/create" class="btn btn-success">
                 <i class="fa fa-plus"></i> <?php echo e(trans('app.Create')); ?>
 
             </a>
         <?php endif; ?>
         <?php if(can('view-'.$module)): ?>
-            <a href="/admin/<?php echo e($module); ?>/export?<?php echo e(@$_SERVER['QUERY_STRING']); ?>" class="btn btn-secondary">
+            <a href="admin/<?php echo e($module); ?>/export?<?php echo e(@$_SERVER['QUERY_STRING']); ?>" class="btn btn-secondary">
                 <i class="fa fa-download"></i> <?php echo e(trans('app.Export')); ?>
 
             </a>
@@ -41,6 +41,8 @@
                         <th class="ml-1"><input type="checkbox" id="master"></th>
                         <th class="ml-1"><?php echo e(trans('app.ID')); ?> </th>
                         <th class="ml-2"><?php echo e(trans('app.Title')); ?> </th>
+                        <th class="ml-2"><?php echo e(trans('app.Plan')); ?> </th>
+                        <th class="ml-2"><?php echo e(trans('app.Expiry date')); ?> </th>
                         <th class="ml-2"><?php echo e(trans('app.Industry')); ?> </th>
                         <th class="ml-2"><?php echo e(trans('app.Country')); ?> </th>
                         <th class="ml-2"><?php echo e(trans('app.Created at')); ?></th>
@@ -56,6 +58,14 @@
                             <td data-label="#"><?php echo e($row->id); ?></td>
                             <td data-label="<?php echo e(trans('app.Title')); ?>">
                                 <?php echo e($row->title); ?>
+
+                            </td>
+                            <td data-label="<?php echo e(trans('app.Plan')); ?>">
+                                <?php echo e($row->plan->title); ?>
+
+                            </td>
+                            <td data-label="<?php echo e(trans('app.Expiry date')); ?>">
+                                <?php echo e($row->expiry_date); ?>
 
                             </td>
                             <td data-label="<?php echo e(trans('app.Industry')); ?>">
@@ -93,7 +103,11 @@
                 </table>
             </div>
             <div class="d-flex justify-content-center">
-                <?php echo $rows->appends(['title'=>request('title')])->links(); ?>
+                <?php echo $rows->appends([
+            'country_id'=>request('country_id'),
+            'industry_id'=>request('industry_id'),
+            'plan_id'=>request('plan_id'),
+            'title'=>request('title')])->links(); ?>
 
             </div>
         <?php else: ?>

@@ -8,6 +8,7 @@
 <div class="recruiter_inputs" style="display: none;">
     <?php echo $__env->make('form.select',['name'=>'company_id','options'=>$row->getCompanies(),'attributes'=>['class'=>'form-control','label'=>trans('app.Company'),'placeholder'=>trans('app.Company'),'id'=>'company_id','required'=>1]], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php echo $__env->make('form.select',['name'=>'is_company_admin','options'=>['1'=>trans('app.Yes'),'0'=>trans('app.No')],'attributes'=>['class'=>'form-control','label'=>trans('app.Is company admin'),'placeholder'=>trans('app.Is company admin'),'id'=>'is_company_admin']], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('form.select',['name'=>'is_verified','options'=>['1'=>trans('app.Yes'),'0'=>trans('app.No')],'attributes'=>['class'=>'form-control','label'=>trans('app.Is verified'),'placeholder'=>trans('app.Is verified'),'id'=>'is_verified']], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </div>
 
 <?php echo $__env->make('form.input',['name'=>'name','type'=>'text','attributes'=>['class'=>'form-control','label'=>trans('app.Name'),'placeholder'=>trans('app.Name'),'autocomplete'=>"off",'required'=>1]], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -40,6 +41,7 @@
                     $('#company_id').attr('required',false);
                     $('#company_id').val('');
                     $('#is_company_admin').val(0);
+                    $('#is_verified').val(0);
                     $('.recruiter_inputs').hide();
                 }
             });

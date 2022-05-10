@@ -13,7 +13,7 @@ class ProfileWithTypeEmployeeTest extends TestCase {
     public function test_get_edit() {
         dump(get_class($this) . ' ' . __FUNCTION__);
         $this->actingAsEmployeeUser();
-        $this->get('/profile/edit')
+        $this->get('en/profile/edit')
             ->assertStatus(200);
     }
 
@@ -31,7 +31,7 @@ class ProfileWithTypeEmployeeTest extends TestCase {
             'degree'=>'bachelor',
             'bio'=>'Bio information',
         ];
-        $this->post('/profile/edit', $factory)
+        $this->post('en/profile/edit', $factory)
             ->assertStatus(302)
             ->assertSessionHas('flash_notification.0.level', 'success');
     }
@@ -39,14 +39,14 @@ class ProfileWithTypeEmployeeTest extends TestCase {
     public function test_get_change_password() {
         dump(get_class($this) . ' ' . __FUNCTION__);
         $this->actingAsEmployeeUser();
-        $this->get('/profile/change-password')
+        $this->get('en/profile/change-password')
             ->assertStatus(200);
     }
 
     public function test_post_change_password() {
         dump(get_class($this) . ' ' . __FUNCTION__);
         $this->actingAsEmployeeUser();
-        $this->post('/profile/change-password', [
+        $this->post('en/profile/change-password', [
             'old_password' => 'demo@12345',
             'password' => 'demo@12345',
             'password_confirmation' => 'demo@12345',
@@ -57,7 +57,7 @@ class ProfileWithTypeEmployeeTest extends TestCase {
     public function test_get_logout() {
         dump(get_class($this) . ' ' . __FUNCTION__);
         $this->actingAsEmployeeUser();
-        $this->get('/profile/logout')
+        $this->get('en/profile/logout')
             ->assertStatus(302)
             ->assertSessionHas('flash_notification.0.level', 'success');
     }

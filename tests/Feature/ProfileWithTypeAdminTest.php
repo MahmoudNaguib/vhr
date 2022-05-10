@@ -13,7 +13,7 @@ class ProfileWithTypeAdminTest extends TestCase {
     public function test_get_edit() {
         dump(get_class($this) . ' ' . __FUNCTION__);
         $this->actingAsAdmin();
-        $this->get('/profile/edit')
+        $this->get('en/profile/edit')
             ->assertStatus(200);
     }
 
@@ -25,7 +25,7 @@ class ProfileWithTypeAdminTest extends TestCase {
             'name' => auth()->user()->name,
             'mobile' => auth()->user()->mobile,
         ];
-        $this->post('/profile/edit', $factory)
+        $this->post('en/profile/edit', $factory)
             ->assertStatus(302)
             ->assertSessionHas('flash_notification.0.level', 'success');
     }
@@ -33,14 +33,14 @@ class ProfileWithTypeAdminTest extends TestCase {
     public function test_get_change_password() {
         dump(get_class($this) . ' ' . __FUNCTION__);
         $this->actingAsAdmin();
-        $this->get('/profile/change-password')
+        $this->get('en/profile/change-password')
             ->assertStatus(200);
     }
 
     public function test_post_change_password() {
         dump(get_class($this) . ' ' . __FUNCTION__);
         $this->actingAsAdmin();
-        $this->post('/profile/change-password', [
+        $this->post('en/profile/change-password', [
             'old_password' => 'demo@12345',
             'password' => 'demo@12345',
             'password_confirmation' => 'demo@12345',
@@ -51,7 +51,7 @@ class ProfileWithTypeAdminTest extends TestCase {
     public function test_get_logout() {
         dump(get_class($this) . ' ' . __FUNCTION__);
         $this->actingAsAdmin();
-        $this->get('/profile/logout')
+        $this->get('en/profile/logout')
             ->assertStatus(302)
             ->assertSessionHas('flash_notification.0.level', 'success');
     }

@@ -10,10 +10,10 @@
                 <td>{{$row->type}}</td>
             </tr>
             @if($row->type=='admin' && @$row->role_id)
-            <tr>
-                <td>{{trans('app.Role')}}</td>
-                <td>{{$row->role->title}}</td>
-            </tr>
+                <tr>
+                    <td>{{trans('app.Role')}}</td>
+                    <td>{{$row->role->title}}</td>
+                </tr>
             @endif
             @if($row->type=='recruiter' && @$row->company_id)
                 <tr>
@@ -23,6 +23,10 @@
                 <tr>
                     <td>{{trans('app.Is company admin')}}</td>
                     <td>{{($row->is_company_admin)?trans('app.Yes'):trans('app.No')}}</td>
+                </tr>
+                <tr>
+                    <td>{{trans('app.Is verified')}}</td>
+                    <td>{{(@$row->is_verified)?trans('app.Yes'):app('app.No')}}</td>
                 </tr>
             @endif
             <tr>

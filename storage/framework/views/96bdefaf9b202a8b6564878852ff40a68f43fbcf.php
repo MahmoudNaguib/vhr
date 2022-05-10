@@ -9,10 +9,10 @@
                 <td><?php echo e($row->type); ?></td>
             </tr>
             <?php if($row->type=='admin' && @$row->role_id): ?>
-            <tr>
-                <td><?php echo e(trans('app.Role')); ?></td>
-                <td><?php echo e($row->role->title); ?></td>
-            </tr>
+                <tr>
+                    <td><?php echo e(trans('app.Role')); ?></td>
+                    <td><?php echo e($row->role->title); ?></td>
+                </tr>
             <?php endif; ?>
             <?php if($row->type=='recruiter' && @$row->company_id): ?>
                 <tr>
@@ -22,6 +22,10 @@
                 <tr>
                     <td><?php echo e(trans('app.Is company admin')); ?></td>
                     <td><?php echo e(($row->is_company_admin)?trans('app.Yes'):trans('app.No')); ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo e(trans('app.Is verified')); ?></td>
+                    <td><?php echo e((@$row->is_verified)?trans('app.Yes'):app('app.No')); ?></td>
                 </tr>
             <?php endif; ?>
             <tr>
