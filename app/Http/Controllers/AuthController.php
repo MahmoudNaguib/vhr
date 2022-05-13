@@ -25,6 +25,9 @@ class AuthController extends \App\Http\Controllers\Controller {
     }
 
     public function postRegister() {
+        request()->request->add([
+            'type' => 'recruiter',
+        ]);
         $this->validate(request(), $this->rules);
         if ($this->model->register()) {
             flash()->success(trans('app.Welcome to our community, We have sent you an email, Please check your inbox'));

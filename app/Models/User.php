@@ -235,8 +235,16 @@ class User extends Authenticatable {
         return $query->where('is_active', '=', 1)->where('confirmed', 1);
     }
 
+    public function scopeRecruiter($query) {
+        return $query->where('type', '=', 'recruiter');
+    }
+
+    public function scopeEmployee($query) {
+        return $query->where('type', '=', 'employee');
+    }
+
     public function scopeAdmin($query) {
-        return $query->whereNotNull('role_id');
+        return $query->where('type', '=', 'admin')->whereNotNull('role_id');
     }
 
     public function scopeGuest($query) {

@@ -16,7 +16,7 @@
         </label>
     </div>
     <div class="form-group mt-3">
-        <?php echo $__env->make('form.submit',['label'=>trans('Submit')], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php echo $__env->make('form.submit',['label'=>trans('app.Submit')], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <a href="auth/forgot-password"><?php echo e(trans('app.Forgot password')); ?></a> |
         <a href="auth/register"><?php echo e(trans('app.Register')); ?></a>
     </div>

@@ -14,13 +14,15 @@ class CompanyController extends \App\Http\Controllers\Controller {
     public function getEdit() {
         $data['page_title'] = trans('app.Edit company profile');
         if(!auth()->user()->company_id){
-            $company=\App\Models\Company::create(['title'=>'Company name']);
+            $company=\App\Models\Company::create([
+                'title'=>'Company name',
+                'plan_id'=>1,
+                'expiry_date'=>date('Y-m-d', strtotime(date('Y-m-d') . ' +1 year'))
+            ]);
             if($company){
                 \App\Models\User::where('id',auth()->user()->id)->update([
                     'company_id'=>$company->id,
                     'is_company_admin'=>1,
-                    'plan_id'=>1,
-                    'expiry_date'=>date('Y-m-d', strtotime(date('Y-m-d') . ' +1 year'))
                 ]);
             }
         }
