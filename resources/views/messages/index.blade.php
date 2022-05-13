@@ -15,7 +15,7 @@
     @include('form.input',['name'=>'message','type'=>'textarea','attributes'=>['class'=>'form-control ','label'=>trans('app.Message'),'placeholder'=>trans('app.Message'),'required'=>1]])
 
     <div class="form-group mt-3">
-        @include('form.submit',['label'=>trans('Submit')])
+        @include('form.submit',['label'=>trans('app.Submit')])
     </div>
     {!! Form::close() !!}
 @endsection

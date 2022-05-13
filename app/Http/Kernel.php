@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'localizationRedirect' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
         'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
         'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
+        'ApiLocalization' => \App\Http\Middleware\ApiLocalization::class,
         'IsSuperAdmin' => \App\Http\Middleware\IsSuperAdmin::class,
         'IsAdmin' => \App\Http\Middleware\IsAdmin::class,
         'CompletedProfile' => \App\Http\Middleware\CompletedProfile::class,

@@ -12,13 +12,13 @@
 <meta name="language" content="English">
 <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-<meta property="og:locale" content="en_EG">
+<meta property="og:locale" content="<?php echo e((lang() == 'en')?'en_EG':'ar_EG'); ?>">
 <meta property="og:type" content="website">
 <link rel="canonical" href="<?php echo e(App::make("url")->to('/')); ?>/<?php echo e(Request::path()); ?>" />
 <meta property="og:title" content="<?php echo e(appName()); ?> - <?php echo e(strip_tags(@$page_title)); ?>"/>
 <meta property="og:url" content="<?php echo e(App::make("url")->to('/')); ?>/<?php echo e(Request::path()); ?>"/>
 <meta property="og:site_name" content="<?php echo e(appName()); ?>"/>
-<meta property="og:locale" content="en_US"/>
+<meta property="og:locale" content="<?php echo e((lang() == 'en')?'en_EG':'ar_EG'); ?>">
 <meta property="og:description" content="<?php echo e(@$meta_description); ?>" />
 <meta property="og:image:width" content="500" />
 <meta property="og:image:height" content="500" />

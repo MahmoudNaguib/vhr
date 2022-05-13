@@ -242,7 +242,7 @@ function image($img, $size = '', $attributes = Null) {
 function fileRender($file) {
     if (!$file)
         return '';
-    $path = 'uploads/'.$file;
+    $path = 'uploads/' . $file;
     if (!$file || !file_exists($path)) {
         return '&nbsp;-----';
     }
@@ -257,4 +257,14 @@ function lang() {
 function langs() {
     $languages = (array_keys(config('laravellocalization.supportedLocales'))) ?: [];
     return $languages;
+}
+
+function setlang() {
+    $locale = (request()->segment(2));
+    $supportedLocales = langs();
+    if (!in_array($locale, $supportedLocales)) {
+        $locale = config('app.fallback_locale');
+    }
+    app()->setLocale($locale);
+    return $locale;
 }

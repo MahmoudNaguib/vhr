@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Logged;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
-use App\Models\PushToken;
-use Hash;
-use Illuminate\Support\Facades\Validator;
 use Auth;
+use Hash;
 
 class ProfileController extends Controller {
 

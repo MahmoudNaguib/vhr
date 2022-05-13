@@ -16,7 +16,7 @@
     <?php echo $__env->make('form.input',['name'=>'message','type'=>'textarea','attributes'=>['class'=>'form-control ','label'=>trans('app.Message'),'placeholder'=>trans('app.Message'),'required'=>1]], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <div class="form-group mt-3">
-        <?php echo $__env->make('form.submit',['label'=>trans('Submit')], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php echo $__env->make('form.submit',['label'=>trans('app.Submit')], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
     <?php echo Form::close(); ?>
 

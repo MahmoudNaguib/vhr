@@ -47,7 +47,7 @@ class UsersController extends \App\Http\Controllers\Controller {
             flash()->success(trans('app.Created successfully'));
             return redirect('admin/' . $this->module);
         }
-        flash()->error(trans('app.Failed to do this action'));
+        flash()->error(trans('app.Failed to handle your request'));
     }
 
     public function getEdit($id) {

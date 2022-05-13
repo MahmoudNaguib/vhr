@@ -23,7 +23,7 @@
         @include('form.file',['name'=>'logo','attributes'=>['class'=>'form-control custom-file-input','label'=>trans('app.Logo'),'placeholder'=>trans('app.Logo'),'value'=>conf('logo')]])
 
         <div class="form-group mt-3">
-            @include('form.submit',['label'=>trans('Submit')])
+            @include('form.submit',['label'=>trans('app.Submit')])
         </div>
     </div>
     {!! Form::close() !!}

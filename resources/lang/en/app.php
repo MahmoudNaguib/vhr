@@ -7,7 +7,6 @@ return [
     'List' => 'List',
     'Create' => 'Create',
     'Created successfully' => 'Created successfully',
-    'Failed to do this action' => 'Failed to do this action',
     'Edit' => 'Edit',
     'Update successfully' => 'Update successfully',
     'View' => 'View',
@@ -144,4 +143,5 @@ return [
     'Youtube video link' => 'Youtube video link',
     'Plan' => 'Plan',
     'Expiry date' => 'Expiry date',
+    'Submit' => 'Submit',
 ];

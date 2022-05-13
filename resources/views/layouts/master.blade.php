@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{lang()}}" dir="{{(lang()=='en')?'ltr':'rtl'}}">
 <head>
     @include('partials.meta')
     @include('partials.css')

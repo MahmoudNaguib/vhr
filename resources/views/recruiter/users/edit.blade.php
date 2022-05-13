@@ -7,7 +7,7 @@
     {{ csrf_field() }}
     @include('recruiter.'.$module.'.form',$row)
     <div class="form-group mt-3">
-        @include('form.submit',['label'=>trans('Submit')])
+        @include('form.submit',['label'=>trans('app.Submit')])
     </div>
     {!! Form::close() !!}
 @endsection

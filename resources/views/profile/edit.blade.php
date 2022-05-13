@@ -28,7 +28,7 @@
     @endif
     @include('form.file',['name'=>'image','attributes'=>['class'=>'form-control custom-file-input','label'=>trans('app.Image'),'placeholder'=>trans('app.Image')]])
     <div class="form-group mt-3">
-        @include('form.submit',['label'=>trans('Submit')])
+        @include('form.submit',['label'=>trans('app.Submit')])
     </div>
     {!! Form::close() !!}
 @endsection

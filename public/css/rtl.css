@@ -1,0 +1,10 @@
+html, body, div, p, span, ul, li, a, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Droid Arabic Kufi' !important;
+    font-weight: normal;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+    float: right;
+    padding-left: .5rem;
+}
+
+

@@ -19,7 +19,7 @@
     @include('form.password',['name'=>'password_confirmation','attributes'=>['class'=>'form-control','label'=>trans('app.Password confirmation'),'placeholder'=>trans('app.Password confirmation'),'required'=>1]])
 
     <div class="form-group mt-3">
-        @include('form.submit',['label'=>trans('Submit')])
+        @include('form.submit',['label'=>trans('app.Submit')])
         <a href="auth/forgot-password">{{ trans('app.Forgot password') }}</a> |
         <a href="auth/register">{{ trans('app.Register') }}</a>
     </div>
